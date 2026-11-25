@@ -1,0 +1,10 @@
+# Temporary / local research & audit artifacts
+research/
+screenshots_audit/
+blender/renders/
+*.blend1
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.vercel/
