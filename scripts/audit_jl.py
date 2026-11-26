@@ -183,10 +183,19 @@ def main():
             force_sync_all(page)
             page.screenshot(path=str(SHOTS / "03_desktop_showroom_chameleon.png"))
 
-            # 04 Showroom GSAP Flip Split 50/50
+            # 04 Showroom GSAP Flip Split 50/50 (Cacamba, Munck, Empilhadeiras)
             page.evaluate("() => window.__jlAudit && window.__jlAudit.openShowroomSplit && window.__jlAudit.openShowroomSplit(0)")
             page.wait_for_timeout(850)
             page.screenshot(path=str(SHOTS / "04_desktop_showroom_flip_split.png"))
+
+            page.evaluate("() => window.__jlAudit && window.__jlAudit.openShowroomSplit && window.__jlAudit.openShowroomSplit(1)")
+            page.wait_for_timeout(700)
+            page.screenshot(path=str(SHOTS / "04b_desktop_showroom_munck_split.png"))
+
+            page.evaluate("() => window.__jlAudit && window.__jlAudit.openShowroomSplit && window.__jlAudit.openShowroomSplit(2)")
+            page.wait_for_timeout(700)
+            page.screenshot(path=str(SHOTS / "04c_desktop_showroom_empilhadeira_split.png"))
+
             page.evaluate("() => window.__jlAudit && window.__jlAudit.closeShowroomSplit && window.__jlAudit.closeShowroomSplit()")
             page.wait_for_timeout(450)
 

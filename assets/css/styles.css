@@ -1100,6 +1100,17 @@ body.menu-open .hdr-menu-bars i:last-child { transform: translateY(-2.75px) rota
   object-fit: cover;
   transition: transform 0.65s var(--ease-out);
 }
+.bento-thumb.is-cutout {
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+.bento-thumb.is-cutout img {
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(10, 13, 18, 0.42));
+}
 .bento-card:hover .bento-thumb img {
   transform: scale(1.06);
 }
