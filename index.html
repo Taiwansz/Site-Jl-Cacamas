@@ -3,694 +3,656 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JL Caçambas e Munck — Aluguel de Caçamba de Entulho 4,2 m³ em Indaiatuba/SP</title>
-  <meta name="description" content="Aluguel de caçambas estacionárias 4,2 m³, caminhão Munck e empilhadeiras em Indaiatuba e Região desde 2013. 100% regulamentada pela Lei 097/2017 e Lei 46.594/2005. WhatsApp oficial: (19) 98968-9696.">
-  <meta name="theme-color" content="#0B0D11">
+  <title>JL Caçambas e Munck — Aluguel de Caçamba 4,2 m³ e Munck em Indaiatuba/SP</title>
+  <meta name="description" content="Aluguel de caçambas estacionárias 4,2 m³, caminhão Munck e empilhadeiras em Indaiatuba/SP desde 2013. Regulamentada pela Lei 097/2017 e Lei 46.594/2005. WhatsApp oficial: (19) 98968-9696.">
+  <meta name="theme-color" content="#ECEAE4">
   <meta property="og:title" content="JL Caçambas e Munck — Indaiatuba/SP">
-  <meta property="og:description" content="Vem que dá negócio. Locação de caçambas 4,2 m³, Munck e empilhadeiras com entrega pontual e destinação legal desde 2013.">
-  <meta property="og:image" content="./assets/img/cacamba-3d-render.png">
+  <meta property="og:description" content="Vem que dá negócio. Caçambas 4,2 m³, caminhão Munck e empilhadeiras direto do DIMPE II com lona obrigatória e destinação legal desde 2013.">
+  <meta property="og:image" content="./assets/img/cacamba-3d-cutout.png">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="./assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./assets/css/styles.css">
   <script type="importmap">
     {
       "imports": {
         "three": "./assets/vendor/three.module.min.js",
         "three/addons/loaders/GLTFLoader.js": "./assets/vendor/GLTFLoader.js",
-        "three/addons/environments/RoomEnvironment.js": "./assets/vendor/RoomEnvironment.js"
+        "three/addons/environments/RoomEnvironment.js": "./assets/vendor/RoomEnvironment.js",
+        "three/addons/utils/BufferGeometryUtils.js": "./assets/vendor/BufferGeometryUtils.js"
       }
     }
   </script>
 </head>
-<body data-hdr-theme="dark">
-  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<body data-hdr-theme="light">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- Preloader: Archetype A Chromatic Curtain (5 brand bands) -->
+  <!-- ======================================================================
+       PRELOADER: MINIMALIST COUNTER + 5-BAND CHROMATIC CURTAIN
+       ====================================================================== -->
   <div id="curtainLoader" class="curtain-loader" aria-hidden="true">
-    <div class="curtain-col" style="--c:#0A214E"></div>
-    <div class="curtain-col" style="--c:#F5B800"></div>
-    <div class="curtain-col" style="--c:#0B0D11"></div>
-    <div class="curtain-col" style="--c:#F3EFE6"></div>
-    <div class="curtain-col" style="--c:#2E8B2B"></div>
-    <div class="curtain-badge">
-      <span>JL CAÇAMBAS</span>
-      <small>INDAIATUBA &middot; 4,2 m&sup3;</small>
+    <div class="curtain-bands">
+      <div class="curtain-col" style="--c:#0A0C10"></div>
+      <div class="curtain-col" style="--c:#0A214E"></div>
+      <div class="curtain-col" style="--c:#F5B800"></div>
+      <div class="curtain-col" style="--c:#1E6B2D"></div>
+      <div class="curtain-col" style="--c:#4A1409"></div>
+    </div>
+    <div class="curtain-center" id="curtainCenter">
+      <img src="./assets/img/logo-jl-cacambas-dark.png" alt="" class="curtain-logo">
+      <div class="curtain-meter">
+        <span class="curtain-bar"><i id="curtainBarFill"></i></span>
+        <span class="curtain-pct" id="curtainPct">00%</span>
+      </div>
+      <small class="curtain-caption">INDAIATUBA &middot; 4,2 m&sup3; &middot; DESDE 2013</small>
     </div>
   </div>
 
-  <!-- Global Reading Progress Bar -->
+  <!-- Reading Progress Hairline -->
   <div class="hdr-progress" aria-hidden="true"><span id="topProgressBar" data-progress></span></div>
 
-  <!-- Minimal Floating Chrome Header (Single-Logo Discipline + elementsFromPoint Polarity Sync) -->
+  <!-- ======================================================================
+       FLOATING POLARITY-SYNCED HEADER (SINGLE-LOGO DISCIPLINE, ZERO WHITE BOX)
+       ====================================================================== -->
   <header id="siteHeader" class="hdr" data-hdr role="banner">
     <a href="#topo" class="hdr-brand" aria-label="JL Caçambas — voltar ao topo">
-      <img src="./assets/img/logo-jl-cacambas.png" alt="Logo JL Caçambas" class="hdr-logo-img">
-      <span class="hdr-brand-meta">
-        <strong>JL CAÇAMBAS</strong>
-        <small>INDAIATUBA &middot; DESDE 2013</small>
-      </span>
+      <img src="./assets/img/logo-jl-cacambas.png" alt="JL Caçambas" class="hdr-logo logo-pos">
+      <img src="./assets/img/logo-jl-cacambas-dark.png" alt="JL Caçambas" class="hdr-logo logo-neg">
     </a>
 
-    <p class="hdr-chapter" aria-live="polite">
-      <span id="hdrChapterNum">00</span>
-      <span id="hdrChapterName">Abertura</span>
-    </p>
+    <nav class="hdr-nav" aria-label="Navegação rápida">
+      <a href="#servicos">Serviços</a>
+      <a href="#showroom">Showroom</a>
+      <a href="#simulador">Montar 4,2 m&sup3;</a>
+      <a href="#especificacao">Leis &amp; Frota</a>
+      <a href="#contato">Canal Oficial</a>
+    </nav>
 
     <div class="hdr-actions">
-      <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Vim%20pelo%20site%20oficial%20e%20quero%20solicitar%20uma%20ca%C3%A7amba%20em%20Indaiatuba." target="_blank" rel="noopener noreferrer" class="hdr-pill hdr-wa">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <p class="hdr-chapter" aria-live="polite">
+        <span id="hdrChapterNum">01</span>
+        <span id="hdrChapterName">Abertura</span>
+      </p>
+      <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Vim%20pelo%20site%20oficial%20e%20quero%20solicitar%20uma%20ca%C3%A7amba%20em%20Indaiatuba." target="_blank" rel="noopener noreferrer" class="hdr-wa-pill">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         <span>(19) 98968-9696</span>
       </a>
-      <button id="menuToggleBtn" class="hdr-pill hdr-menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="sumario">
-        <span>Sumário</span>
-        <span class="hdr-menu-icon" aria-hidden="true"><i></i><i></i></span>
+      <button id="menuToggleBtn" class="hdr-menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="sumario" aria-label="Abrir sumário de navegação">
+        <span class="hdr-menu-label">Menu</span>
+        <span class="hdr-menu-bars" aria-hidden="true"><i></i><i></i></span>
       </button>
     </div>
   </header>
 
-  <!-- Vertical Left Chapter Rail (O Jeito Agi) -->
-  <nav class="side-guide" aria-label="Navegação por capítulos">
-    <ul id="sideGuideList" class="side-guide-ticks" data-guide></ul>
-    <div class="side-guide-label">
-      <span class="side-guide-prefix">Capítulo atual</span>
-      <strong id="sideChapterName">Abertura</strong>
-    </div>
-  </nav>
-
-  <!-- Fullscreen Clip-Path Sumário Menu -->
+  <!-- Fullscreen Clip-Path Sumário Overlay -->
   <nav id="sumario" class="menu-overlay" data-menu hidden aria-label="Sumário da JL Caçambas">
     <div class="menu-inner">
-      <div class="menu-meta">
-        <span>JL CAÇAMBAS E MUNCK &middot; CNPJ 19.810.393/0001-27</span>
-        <span>INDAIATUBA / SP &middot; VEM QUE DÁ NEGÓCIO</span>
+      <div class="menu-top-bar">
+        <img src="./assets/img/logo-jl-cacambas-dark.png" alt="JL Caçambas" class="menu-logo">
+        <span class="menu-meta-txt">CNPJ 19.810.393/0001-27 &middot; CCM 139.7421 &middot; INDAIATUBA / SP</span>
       </div>
       <ol class="menu-list">
-        <li><a href="#topo"><b>00</b><span>Abertura &amp; Caçamba 3D</span><small>Unidade 4,2 m&sup3; modelada em escala real</small></a></li>
-        <li><a href="#historia"><b>01</b><span>Raiz em Indaiatuba</span><small>Desde 2013 operando do DIMPE II para toda a cidade</small></a></li>
-        <li><a href="#manifesto"><b>02</b><span>Carga ao Vivo</span><small>Manifesto operacional &amp; enchimento 3D progressivo</small></a></li>
-        <li><a href="#especificacao"><b>03</b><span>Planta CAD &amp; Leis</span><small>Lei 46.594/2005 e Lei Municipal 097/2017</small></a></li>
-        <li><a href="#operacao"><b>04</b><span>Operação em 5 Etapas</span><small>Pedido, enchimento 4,2 m&sup3;, lona e retirada</small></a></li>
-        <li><a href="#frota"><b>05</b><span>Frota, Munck &amp; Parceiros</span><small>Caçambas, Munck, Empilhadeiras e 10 empresas locais</small></a></li>
-        <li><a href="#simulador"><b>06</b><span>Simulador de Obra</span><small>Calcule volume e peça direto no WhatsApp oficial</small></a></li>
-        <li><a href="#compromisso"><b>07</b><span>O Que Eliminamos</span><small>Zero atraso, zero multa, zero golpe</small></a></li>
-        <li><a href="#contato"><b>08</b><span>Canal Oficial &amp; Sede</span><small>Selo anti-golpe, horários e endereço DIMPE II</small></a></li>
+        <li><a href="#topo"><b>01</b><span>Abertura 3D</span><small>Caçamba 4,2 m&sup3; PBR e correntes de aço</small></a></li>
+        <li><a href="#servicos"><b>02</b><span>Serviços &amp; Bento</span><small>Caçambas, Munck, Empilhadeiras e Planos B2B</small></a></li>
+        <li><a href="#showroom"><b>03</b><span>Showroom Interativo</span><small>Especificação técnica em Split 50/50</small></a></li>
+        <li><a href="#simulador"><b>04</b><span>Monte sua Caçamba 4,2 m&sup3;</span><small>Simulador 3D ao vivo com cobertura de lona</small></a></li>
+        <li><a href="#especificacao"><b>05</b><span>Planta CAD, Frota &amp; Parceiros</span><small>Lei 46.594/2005, Lei 097/2017 e 10 empresas locais</small></a></li>
+        <li><a href="#contato"><b>06</b><span>Canal Oficial Anti-Golpe</span><small>Placa verificada, DIMPE II e atendimento direto</small></a></li>
       </ol>
+      <div class="menu-foot">
+        <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Vim%20pelo%20menu%20do%20site%20oficial%20e%20quero%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-yellow">
+          <span class="btn-label">WhatsApp (19) 98968-9696</span>
+          <span class="btn-orb" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+        <a href="tel:+551930174670" class="menu-phone-link">Fixo (19) 3017-4670 &middot; Seg–Sex 07h–16h &middot; Sáb 07h–11h</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Persistent Fixed WebGL 3D Rig (Archetype B + Blender 5.3 GLB) -->
-  <div id="stage3d" class="stage-3d" aria-hidden="true">
-    <canvas id="cacambaCanvas"></canvas>
-    <div id="hud3d" class="hud-3d" aria-hidden="true">
-      <div class="hud-3d-row">
-        <span class="hud-dot"></span>
-        <span id="hudPhaseLabel">ESTÁGIO 00 &middot; UNIDADE PRONTA</span>
-      </div>
-      <div class="hud-3d-bar"><span id="hudFillBar"></span></div>
-      <div class="hud-3d-metrics">
-        <strong id="hudVolumeVal">0,0 m&sup3;</strong>
-        <span>/ 4,2 m&sup3; LIMITE BORDA</span>
-      </div>
-    </div>
+  <!-- ======================================================================
+       FIXED WEBGL STAGE FOR ACTS 01 & 02 (Z-INTERLOCKED BETWEEN L1 TYPE & L3 HUD)
+       ====================================================================== -->
+  <div id="heroStage3d" class="hero-stage-3d" aria-hidden="true">
+    <canvas id="heroWebglCanvas"></canvas>
   </div>
 
   <main id="conteudo">
 
     <!-- ====================================================================
-         ACT 00: HERO-POSTER (7 INVARIANT LAWS — L0 ATMOSPHERE, L1 POSTER TYPE,
-                 L2 LIVE 3D BLENDER DUMPSTER Z-INTERLOCK, L3 4-CORNER HUD <=25w)
+         ACT 01: INDUSTRIAL CONCRETE GALLERY HERO (#ECEAE4) — WEBLOVE 3D STYLE
          ==================================================================== -->
-    <section id="topo" class="scene s-hero" data-theme="dark" data-chapter="00" data-chapter-title="Abertura">
-      <div class="hero-pin">
-        <!-- L0: Atmospheric Grid & Directional Spotlight -->
-        <div class="hero-atmo" aria-hidden="true"></div>
-        <div class="hero-grid" aria-hidden="true"></div>
+    <section id="topo" class="act act-hero" data-theme="light" data-chapter="01" data-chapter-title="Abertura">
+      <div class="hero-backdrop" aria-hidden="true">
+        <div class="hero-grid-lines"></div>
+        <div class="hero-vignette"></div>
+      </div>
 
-        <!-- Optical Continuity Expanding Portal (bridges Act 00 -> Act 01) -->
-        <div id="heroPortal" class="hero-portal" aria-hidden="true"></div>
+      <!-- L3 Top Corners -->
+      <div class="hero-hud-tl">
+        <img src="./assets/img/logo-jl-cacambas.png" alt="JL Caçambas — Vem que dá negócio" class="hero-logo">
+      </div>
 
-        <!-- L1: Monumental Edge-to-Edge Poster Typography (Occluded by L2 3D Dumpster) -->
-        <div class="hero-poster-layer" aria-hidden="false">
-          <p class="hero-poster-sub">
-            <span>ALUGUEL DE CAÇAMBA EM INDAIATUBA</span>
-            <span class="hero-serif-accent">Obra limpa, entrega pontual.</span>
-          </p>
-          <h1 class="hero-poster-title" aria-label="JL Caçambas Indaiatuba">
-            <span class="hp-line">JL</span>
-            <span class="hp-line hp-outline">CAÇAMBAS</span>
-          </h1>
-        </div>
+      <div class="hero-hud-tr">
+        <span class="hero-chip hero-chip-solid">4,2m&sup3; 3D</span>
+        <span class="hero-chip">CCM 139.7421</span>
+      </div>
 
-        <!-- L3: Surgical 4-Corner Micro-HUD (strictly <= 25 words) -->
-        <div class="hero-hud-tl">
-          <img src="./assets/img/logo-jl-cacambas.png" alt="JL Caçambas — Vem que dá negócio" class="hero-brand-logo">
-        </div>
+      <!-- L1 Monumental Edge-to-Edge Poster Typography (Behind #heroStage3d z-20) -->
+      <div class="hero-poster-layer">
+        <h1 class="hero-wordmark" aria-label="JL Caçambas — Indaiatuba">
+          <span class="hw-row hw-top">JL</span>
+          <span class="hw-row hw-bottom">CAÇAMBAS</span>
+        </h1>
+      </div>
 
-        <div class="hero-hud-tr">
-          <span class="hud-tag">CCM 139.7421</span>
-          <span class="hud-tag hud-tag-eco">LEI 097/2017</span>
-        </div>
-
-        <div class="hero-hud-bl">
-          <p class="hero-thesis">Caçambas <strong>4,2 m&sup3;</strong>, Munck e empilhadeiras direto do DIMPE II.</p>
-          <div class="hero-ctas">
-            <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Quero%20pedir%20uma%20ca%C3%A7amba%20de%204%2C2m%C2%B3%20em%20Indaiatuba.%20%5BRef%3A%20Hero-Site%5D" target="_blank" rel="noopener noreferrer" class="btn-yellow">
-              Pedir no WhatsApp &rarr;
-            </a>
-            <a href="#simulador" class="btn-ghost-dark">Simular Obra</a>
-          </div>
-        </div>
-
-        <dl class="hero-hud-br">
-          <div><dt>4,2 m&sup3;</dt><dd>NBR 14728</dd></div>
-          <div><dt>2013</dt><dd>Indaiatuba</dd></div>
-          <div><dt>100%</dt><dd>Com lona</dd></div>
-        </dl>
-
-        <div class="hero-scroll-cue" aria-hidden="true">
-          <span>Role para encher a caçamba</span>
-          <i></i>
+      <!-- L3 Bottom Corners -->
+      <div class="hero-hud-bl">
+        <p class="hero-thesis">Caçambas <strong>4,2m&sup3;,</strong> Munck e empilhadeiras em Indaiatuba.</p>
+        <div class="hero-ctas">
+          <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Quero%20pedir%20uma%20ca%C3%A7amba%20de%204%2C2%20m%C2%B3%20em%20Indaiatuba." target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark magnetic-btn">
+            <span class="btn-label">Pedir Caçamba</span>
+            <span class="btn-orb" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </a>
+          <a href="#simulador" class="btn-pill btn-pill-outline-light">
+            <span class="btn-label">Montar Carga</span>
+            <span class="btn-orb" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+            </span>
+          </a>
         </div>
       </div>
+
+      <ul class="hero-hud-br" aria-label="Credenciais operacionais">
+        <li>DESDE 2013</li>
+        <li>LEI 097/2017</li>
+        <li>COM LONA</li>
+      </ul>
     </section>
 
     <!-- ====================================================================
-         ACT 01: STICKY 50/50 INDAIATUBA ROOTS + GIANT BLEEDING SYLLABLES
+         ACT 02: OBSIDIAN ATMOSPHERE INVERSION (#0A0C10) + COLORFUL BENTO
          ==================================================================== -->
-    <section id="historia" class="scene s-pref" data-theme="light" data-chapter="01" data-chapter-title="Raiz em Indaiatuba">
-      <div class="pref-grid">
-        <div class="pref-photo">
-          <img src="./assets/img/frota-parque-ecologico.jpg" alt="Caminhão poliguindaste da JL Caçambas operando em frente ao Parque Ecológico de Indaiatuba">
-          <div class="pref-scrim" aria-hidden="true"></div>
-          <div class="pref-giant" aria-hidden="true">
-            <span>IN</span>
-            <span>DAI</span>
-            <span>A</span>
-            <span>TU</span>
-            <span>BA</span>
-          </div>
-          <div class="pref-photo-caption">
-            <span>FROTA PRÓPRIA &middot; PARQUE ECOLÓGICO</span>
-            <strong>CCM 139.7421</strong>
-          </div>
-        </div>
-
-        <div class="pref-text">
-          <span class="kicker"><b>01</b> RAIZ EM INDAIATUBA &middot; DESDE 2013</span>
-          <h2 class="t-l">Mais de uma década mantendo obras <em>em movimento.</em></h2>
-
-          <div class="pref-body">
-            <p data-reveal>
-              A <strong>JL Caçambas e Munck</strong> iniciou suas atividades em <strong>2013</strong>, em Indaiatuba/SP. Nascemos com uma premissa operacional simples: obra parada por atraso de entulho custa caro demais para o cliente.
-            </p>
-            <p data-reveal>
-              Atendemos pessoas físicas em reformas residenciais e empresas, construtoras e indústrias do Distrito Industrial com <strong>caçambas estacionárias de 4,2 m&sup3;</strong>, caminhão Munck, empilhadeiras e prazos contratuais sob medida.
-            </p>
-            <p class="pref-hl" data-scrub-words>
-              Cada entrega sai da nossa base no <strong>DIMPE II</strong> cadastrada, identificada e dentro de todas as exigências municipais — sem improviso e sem risco de multa na sua calçada.
-            </p>
+    <section id="servicos" class="act act-obsidian" data-theme="dark" data-chapter="02" data-chapter-title="Serviços &amp; Frota">
+      <!-- Band 1: WEBLOVE Numbered Hairline Index (traversed by 3D steel chains) -->
+      <div class="obsidian-index-band">
+        <div class="wrap">
+          <div class="obsidian-head">
+            <p class="eyebrow">SERVIÇOS &amp; ESTRUTURA &middot; INDAIATUBA / SP</p>
+            <h2 class="display-xl">FORÇA OPERACIONAL PARA SUA OBRA <span class="hl">NÃO PARAR.</span></h2>
           </div>
 
-          <ol class="ledger-timeline">
-            <li data-reveal>
-              <span class="lt-period">CAÇAMBAS 4,2 m&sup3;</span>
-              <div>
-                <h3>Remoção de Entulho &amp; Demolição</h3>
-                <p>Unidades amarelas regulamentadas para obras residenciais, comerciais e industriais com retirada ágil.</p>
-              </div>
+          <ol class="index-list">
+            <li>
+              <button type="button" class="index-row" data-jump-showroom="0" data-open-split="true">
+                <span class="idx-num">01</span>
+                <span class="idx-title">CAÇAMBAS 4,2 m&sup3;</span>
+                <span class="idx-meta">Entulho, reformas e demolição &middot; Lei 097/2017</span>
+                <span class="idx-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </span>
+              </button>
             </li>
-            <li data-reveal>
-              <span class="lt-period">MUNCK &amp; CARGAS</span>
-              <div>
-                <h3>Içamento e Movimentação Pesada</h3>
-                <p>Locação de caminhão Munck e empilhadeiras para descargas técnicas, máquinas e estruturas no canteiro.</p>
-              </div>
+            <li>
+              <button type="button" class="index-row" data-jump-showroom="1" data-open-split="true">
+                <span class="idx-num">02</span>
+                <span class="idx-title">CAMINHÃO MUNCK</span>
+                <span class="idx-meta">Içamento técnico, máquinas e estruturas pesadas</span>
+                <span class="idx-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </span>
+              </button>
             </li>
-            <li data-reveal>
-              <span class="lt-period">PLANOS B2B</span>
-              <div>
-                <h3>Condições Especiais para Empresas</h3>
-                <p>Trocas programadas, faturamento organizado e prioridade de despacho para construtoras e indústrias de Indaiatuba.</p>
-              </div>
+            <li>
+              <button type="button" class="index-row" data-jump-showroom="2" data-open-split="true">
+                <span class="idx-num">03</span>
+                <span class="idx-title">EMPILHADEIRAS</span>
+                <span class="idx-meta">Movimentação de pallets em galpões e canteiros</span>
+                <span class="idx-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="index-row" data-jump-showroom="3" data-open-split="true">
+                <span class="idx-num">04</span>
+                <span class="idx-title">PLANOS B2B</span>
+                <span class="idx-meta">Trocas programadas e faturamento para construtoras</span>
+                <span class="idx-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </span>
+              </button>
             </li>
           </ol>
+        </div>
+      </div>
 
-          <div class="pref-signoff">
-            <svg class="precision-sig" viewBox="0 0 320 64" fill="none" aria-hidden="true">
-              <path d="M12 16 H52 V44 C52 52 44 56 34 56 C24 56 18 51 16 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-              <path d="M72 16 V54 H108" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M128 38 C142 20 162 20 174 36 C186 52 208 22 228 36 C248 50 272 28 308 32" stroke="#C99100" stroke-width="2.2" stroke-linecap="round"/>
-            </svg>
-            <div class="signoff-meta">
-              <strong>JL Caçambas e Munck</strong>
-              <span>CNPJ 19.810.393/0001-27 &middot; Rua Carmem Mendes Mantovani, 38 &middot; DIMPE II</span>
+      <!-- Band 2: Asymmetric Colorful 5-Cell Bento Grid (Zero Empty Cells) -->
+      <div class="bento-band">
+        <div class="wrap">
+          <div class="bento-grid">
+            <!-- Cell 1: Large Vertical Left (row-span-2, Navy #0A214E) -->
+            <article class="bento-card bento-featured" data-reveal>
+              <img src="./assets/img/icamento-poliguindaste.jpg" alt="Caçamba amarela da JL Caçambas sendo içada pelo caminhão poliguindaste" class="bento-bg-img">
+              <div class="bento-featured-scrim" aria-hidden="true"></div>
+              <div class="bento-content">
+                <span class="bento-tag">CARRO-CHEFE &middot; CCM 139.7421</span>
+                <h3 class="bento-title-lg">Caçambas 4,2 m&sup3;</h3>
+                <p class="bento-desc">Entrega rápida direto da base DIMPE II com lona obrigatória e destinação ambiental regular.</p>
+                <button type="button" class="btn-pill btn-pill-yellow" data-jump-showroom="0" data-open-split="true">
+                  <span class="btn-label">Explorar</span>
+                  <span class="btn-orb" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </span>
+                </button>
+              </div>
+            </article>
+
+            <!-- Cell 2: Safety Yellow (#F5B800, dark ink) -->
+            <article class="bento-card bento-yellow" data-reveal>
+              <div class="bento-copy">
+                <span class="bento-tag">RESIDENCIAL &amp; COMERCIAL</span>
+                <h3>Reformas &amp; Obras</h3>
+                <p>Piso, alvenaria e entulho recolhidos no prazo certo.</p>
+                <a href="#simulador" class="bento-link">
+                  <span>Montar carga</span>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+              <div class="bento-thumb">
+                <img src="./assets/img/cacambas-fileira.jpg" alt="Fileira de caçambas estacionárias amarelas da JL Caçambas">
+              </div>
+            </article>
+
+            <!-- Cell 3: Environmental Green (#1B5E27) -->
+            <article class="bento-card bento-green" data-reveal>
+              <div class="bento-copy">
+                <span class="bento-tag">REGULARIDADE TOTAL</span>
+                <h3>Lei 097/2017 &amp; Lona</h3>
+                <p>Amarelo fosforescente, refletivos e carga 100% coberta.</p>
+                <a href="#especificacao" class="bento-link">
+                  <span>Ver normas</span>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+              <div class="bento-thumb">
+                <img src="./assets/img/caminhao-lona-lei097.jpg" alt="Caminhão da JL Caçambas transportando caçamba coberta com lona">
+              </div>
+            </article>
+
+            <!-- Cell 4: Industrial Terracotta (#8C2D19) -->
+            <article class="bento-card bento-terra" data-reveal>
+              <div class="bento-copy">
+                <span class="bento-tag">IÇAMENTO PESADO</span>
+                <h3>Caminhão Munck</h3>
+                <p>Carga, descarga e içamento técnico em obras e fábricas.</p>
+                <button type="button" class="bento-link" data-jump-showroom="1" data-open-split="true">
+                  <span>Especificação</span>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              </div>
+              <div class="bento-thumb">
+                <img src="./assets/img/frota-patio.jpg" alt="Frota própria de caminhões no pátio da JL Caçambas no DIMPE II">
+              </div>
+            </article>
+
+            <!-- Cell 5: Steel Graphite (#181D26) -->
+            <article class="bento-card bento-steel" data-reveal>
+              <div class="bento-copy">
+                <span class="bento-tag">CONSTRUTORAS &amp; INDÚSTRIAS</span>
+                <h3>Planos Empresas B2B</h3>
+                <p>Trocas programadas e condições exclusivas em Indaiatuba.</p>
+                <button type="button" class="bento-link" data-jump-showroom="3" data-open-split="true">
+                  <span>Ver contratos</span>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              </div>
+              <div class="bento-thumb">
+                <img src="./assets/img/cacamba-obra-residencial.jpg" alt="Caçamba da JL posicionada em canteiro de obra em Indaiatuba">
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ACT 03: CHAMELEON SHOWROOM + GSAP FLIP SPLIT 50/50 (BURGER KING STYLE)
+         ==================================================================== -->
+    <section id="showroom" class="act act-showroom" data-theme="chameleon" data-chapter="03" data-chapter-title="Showroom">
+      <div id="showroomStage" class="sr-stage" data-mode="hero" data-tone="light" data-slide="0">
+        <!-- Left 54% Editorial Paper Split Panel (sweeps in via GSAP) -->
+        <aside id="srSplitPanel" class="sr-split-panel" aria-hidden="true">
+          <div class="sr-split-inner" id="srSplitInner">
+            <div class="sr-split-top">
+              <button type="button" id="srBackBtn" class="sr-back-btn">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                <span>Voltar ao palco</span>
+              </button>
+              <span class="sr-split-counter" id="srSplitCounter">01 / 04</span>
+            </div>
+
+            <div class="sr-split-body" id="srSplitBody">
+              <span class="sr-split-kicker" id="srSplitKicker">ESTACIONÁRIA NBR 14728</span>
+              <h2 class="sr-split-title" id="srSplitTitle">
+                <span id="srSplitTitleA">CAÇAMBA</span>
+                <span class="hl" id="srSplitTitleB">4,2 m&sup3;</span>
+              </h2>
+              <p class="sr-split-desc" id="srSplitDesc">
+                Unidade estacionária em aço reforçado cadastrada sob CCM 139.7421. Atende reformas residenciais, construções e demolições em toda Indaiatuba com transporte 100% coberto por lona.
+              </p>
+
+              <!-- 4 SVG Micro-Icon Strip -->
+              <ul class="sr-spec-strip" id="srSpecStrip" aria-label="Especificações principais">
+                <li>
+                  <span class="sr-spec-ico">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                  </span>
+                  <span data-spec-slot="0">4,2 m&sup3; Úteis</span>
+                </li>
+                <li>
+                  <span class="sr-spec-ico">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </span>
+                  <span data-spec-slot="1">Lei 097/2017</span>
+                </li>
+                <li>
+                  <span class="sr-spec-ico">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
+                  </span>
+                  <span data-spec-slot="2">Com Lona</span>
+                </li>
+                <li>
+                  <span class="sr-spec-ico">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </span>
+                  <span data-spec-slot="3">Base DIMPE II</span>
+                </li>
+              </ul>
+
+              <div class="sr-split-actions">
+                <a id="srWaBtn" href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Vi%20a%20Ca%C3%A7amba%204%2C2%20m%C2%B3%20no%20Showroom%20e%20quero%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-dark">
+                  <span class="btn-label">Cotar no WhatsApp</span>
+                  <span class="btn-orb" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </span>
+                </a>
+                <a href="#simulador" class="sr-text-link">Simular carga em 3D &rarr;</a>
+              </div>
+            </div>
+
+            <div class="sr-split-pager">
+              <button type="button" class="sr-slot-btn" data-sr-prev aria-label="Solução anterior">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+              </button>
+              <button type="button" class="sr-slot-btn" data-sr-next aria-label="Próxima solução">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <span class="sr-slot-hint">Troca vertical de soluções</span>
             </div>
           </div>
+        </aside>
+
+        <!-- Monumental Hero Background Typography (visible in Hero mode) -->
+        <div class="sr-hero-backdrop" id="srHeroBackdrop">
+          <span class="sr-hero-counter" id="srHeroCounter">01 / 04 &middot; SHOWROOM JL</span>
+          <h2 class="sr-hero-wordmark" id="srHeroWordmark">CAÇAMBA 4,2 m&sup3;</h2>
+        </div>
+
+        <!-- Parallax Satellite Badges (visible in Hero mode) -->
+        <div class="sr-satellites" id="srSatellites" aria-hidden="true">
+          <span class="sr-sat sr-sat-a" id="srSatA">LIMITE BORDA 4,2 m&sup3;</span>
+          <span class="sr-sat sr-sat-b" id="srSatB">CCM 139.7421</span>
+        </div>
+
+        <!-- FLIP TARGET: Visual Shell that seamlessly crosses the 54/46 vertical seam! -->
+        <div id="srVisualWrap" class="sr-visual-wrap is-cutout">
+          <div class="sr-visual-inner" id="srVisualInner">
+            <img id="srVisualImg" src="./assets/img/cacamba-3d-cutout.png" alt="Render 3D transparente da Caçamba 4,2 m³ da JL Caçambas">
+          </div>
+        </div>
+
+        <!-- Hero Mode Bottom Navigation & Open-Split Trigger -->
+        <div class="sr-hero-controls" id="srHeroControls">
+          <div class="sr-dots" role="tablist" aria-label="Selecionar solução da JL Caçambas">
+            <button type="button" class="sr-dot is-active" data-sr-dot="0" aria-selected="true">01 Caçamba</button>
+            <button type="button" class="sr-dot" data-sr-dot="1" aria-selected="false">02 Munck</button>
+            <button type="button" class="sr-dot" data-sr-dot="2" aria-selected="false">03 Empilhadeiras</button>
+            <button type="button" class="sr-dot" data-sr-dot="3" aria-selected="false">04 B2B</button>
+          </div>
+
+          <div class="sr-hero-bar">
+            <button type="button" class="sr-nav-circle" data-sr-prev aria-label="Solução anterior">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            </button>
+
+            <button type="button" id="srOpenSplitBtn" class="btn-pill btn-pill-contrast">
+              <span class="btn-label">Ver especificação</span>
+              <span class="btn-orb" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </button>
+
+            <button type="button" class="sr-nav-circle" data-sr-next aria-label="Próxima solução">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         ACT 02: EDITORIAL ZIG-ZAG MANIFESTO + LIVE 3D DUMPSTER FILLING (L1-L3)
+         ACT 04: GAMIFIED 3D DUMPSTER BUILDER (#F7F5EF — CACAU SHOW + BLENDER 3D)
          ==================================================================== -->
-    <section id="manifesto" class="scene s-manifesto" data-theme="navy" data-chapter="02" data-chapter-title="Carga ao Vivo">
-      <div class="manifesto-particles" aria-hidden="true">
-        <canvas id="dustCanvas"></canvas>
-      </div>
-
-      <div class="wrap-wide manifesto-layout">
-        <div class="manifesto-copy">
-          <span class="kicker kicker-yellow"><b>02</b> ENGENHARIA DE CANTEIRO &middot; CARGA EM TEMPO REAL</span>
-
-          <p class="m-big" data-scrub-words>
-            Alugar caçamba não é só deixar uma caixa de ferro na rua. É manter o ritmo inteiro da sua obra.
-          </p>
-
-          <div class="m-card-row" data-reveal>
-            <span class="m-step">CAMADA 01 &middot; CONCRETO &amp; BRITA</span>
-            <h3>Base pesada sem ceder</h3>
-            <p>Chapas dobradas em aço carbono sobre longarinas reforçadas absorvem o impacto direto de blocos de concreto, contrapiso e demolição pesada.</p>
-          </div>
-
-          <div class="m-card-row" data-reveal>
-            <span class="m-step">CAMADA 02 &middot; ALVENARIA &amp; TIJOLOS</span>
-            <h3>Capacidade real de 4,2 m&sup3;</h3>
-            <p>Geometria trapezoidal padrão Brooks permite carga lateral confortável com carrinho de mão sem desperdiçar espaço útil nem estourar a borda.</p>
-          </div>
-
-          <div class="m-card-row" data-reveal>
-            <span class="m-step">CAMADA 03 &middot; MADEIRA &amp; ACABAMENTO</span>
-            <h3>Troca rápida quando enche</h3>
-            <p>Mandou mensagem no <strong>(19) 98968-9696</strong>, nossa equipe em Indaiatuba agenda retirada ou troca simultânea para o pedreiro não perder um minuto.</p>
-          </div>
+    <section id="simulador" class="act act-builder" data-theme="light" data-chapter="04" data-chapter-title="Montar 4,2 m&sup3;">
+      <div class="wrap">
+        <div class="builder-head">
+          <p class="eyebrow">SIMULADOR 3D INTERATIVO &middot; 4,2 m&sup3;</p>
+          <h2 class="display-xl">MONTE SUA CAÇAMBA <span class="hl">4,2 m&sup3;</span> AO VIVO.</h2>
+          <p class="builder-lead">Adicione os resíduos da sua obra até 6 lotes. A caçamba 3D enche em tempo real e fecha a lona azul automaticamente no limite legal da borda.</p>
         </div>
 
-        <!-- Dedicated breathing viewport column where Fixed 3D Blender Dumpster orbits & fills! -->
-        <div class="manifesto-stage-spacer" aria-hidden="true">
-          <div class="stage-anchor-card">
-            <span class="anchor-kicker">SIMULAÇÃO 3D AO VIVO &middot; BLENDER PBR</span>
-            <p>Role a página e acompanhe o enchimento progressivo de concreto, alvenaria e madeira dentro da caçamba de 4,2 m&sup3;.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         ACT 03: TECHNICAL CAD SVG BLUEPRINT DRAWN ON SCROLL (O JEITO AGI)
-         ==================================================================== -->
-    <section id="especificacao" class="scene s-cad" data-theme="light" data-chapter="03" data-chapter-title="Planta CAD &amp; Leis">
-      <div class="pin cad-pin">
-        <div class="cad-grid-bg" aria-hidden="true"></div>
-        <div class="wrap-wide cad-layout">
-          <div class="cad-header">
-            <span class="kicker"><b>03</b> CONFORMIDADE LEGAL &middot; INDAIATUBA / SP</span>
-            <h2 class="t-l">Planta técnica <em>4,2 m&sup3;</em> &amp; normas municipais.</h2>
-            <p class="cad-intro">A JL Caçambas opera sob rigor integral da <strong>Lei 46.594/2005</strong> e da <strong>Lei Municipal 097/2017</strong> de Indaiatuba — protegendo sua obra contra multas e autuações.</p>
-
-            <div class="cad-law-cards">
-              <article class="law-card" data-cad-card="1">
-                <span class="law-code">LEI 46.594/2005</span>
-                <h3>Posicionamento &amp; Borda</h3>
-                <ul>
-                  <li>Volume útil <strong>4,2 m&sup3;</strong> — entulho nunca acima da borda superior.</li>
-                  <li>Distância máxima de <strong>30 cm do meio-fio</strong> em vaga permitida.</li>
-                  <li>Mínimo de <strong>10 m da esquina</strong>; proibida sobre calçadas, hidrantes, zona azul ou faixa amarela.</li>
-                </ul>
+        <div class="builder-grid">
+          <!-- Left Column: 6 Interactive Debris Cards + Delivery Controls -->
+          <div class="builder-left">
+            <div class="debris-grid" id="debrisGrid">
+              <!-- 1. Alvenaria -->
+              <article class="debris-card" data-debris="alvenaria">
+                <div class="debris-top">
+                  <span class="debris-ico ico-alvenaria" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="8" height="6" rx="1"/><rect x="13" y="14" width="8" height="6" rx="1"/><line x1="12" y1="4" x2="12" y2="10"/></svg>
+                  </span>
+                  <span class="debris-unit">+0,7 m&sup3;</span>
+                </div>
+                <h3>Alvenaria &amp; Tijolos</h3>
+                <p>Blocos cerâmicos, paredes e reboco</p>
+                <div class="debris-stepper">
+                  <button type="button" class="step-btn" data-act="sub" aria-label="Remover lote de Alvenaria e Tijolos">&minus;</button>
+                  <strong class="step-count" data-count>0</strong>
+                  <button type="button" class="step-btn step-add" data-act="add" aria-label="Adicionar lote de Alvenaria e Tijolos">+</button>
+                </div>
               </article>
 
-              <article class="law-card" data-cad-card="2">
-                <span class="law-code law-code-navy">LEI 097/2017 &middot; INDAIATUBA</span>
-                <h3>Sinalização &amp; Cobertura</h3>
-                <ul>
-                  <li>Pintura obrigatória em <strong>amarelo fosforescente</strong> com faixas refletivas.</li>
-                  <li>Transporte <strong>100% coberto por lona</strong> evitando sujeira e acidentes nas vias.</li>
-                  <li>Cadastrada no órgão municipal com numeração visível e mínimo de <strong>5 m do alinhamento</strong> em cruzamentos.</li>
-                </ul>
+              <!-- 2. Concreto -->
+              <article class="debris-card" data-debris="concreto">
+                <div class="debris-top">
+                  <span class="debris-ico ico-concreto" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 3 21 8 21 16 12 21 3 16 3 8 12 3"/><line x1="12" y1="12" x2="21" y2="8"/><line x1="12" y1="12" x2="12" y2="21"/><line x1="12" y1="12" x2="3" y2="8"/></svg>
+                  </span>
+                  <span class="debris-unit">+0,7 m&sup3;</span>
+                </div>
+                <h3>Concreto &amp; Brita</h3>
+                <p>Contrapiso, pilares, lajes e cascalho</p>
+                <div class="debris-stepper">
+                  <button type="button" class="step-btn" data-act="sub" aria-label="Remover lote de Concreto e Brita">&minus;</button>
+                  <strong class="step-count" data-count>0</strong>
+                  <button type="button" class="step-btn step-add" data-act="add" aria-label="Adicionar lote de Concreto e Brita">+</button>
+                </div>
+              </article>
+
+              <!-- 3. Madeira -->
+              <article class="debris-card" data-debris="madeira">
+                <div class="debris-top">
+                  <span class="debris-ico ico-madeira" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="15" width="18" height="4" rx="1"/></svg>
+                  </span>
+                  <span class="debris-unit">+0,7 m&sup3;</span>
+                </div>
+                <h3>Madeira &amp; Caixaria</h3>
+                <p>Tábuas, vigas, fôrmas e sobras de obra</p>
+                <div class="debris-stepper">
+                  <button type="button" class="step-btn" data-act="sub" aria-label="Remover lote de Madeira e Caixaria">&minus;</button>
+                  <strong class="step-count" data-count>0</strong>
+                  <button type="button" class="step-btn step-add" data-act="add" aria-label="Adicionar lote de Madeira e Caixaria">+</button>
+                </div>
+              </article>
+
+              <!-- 4. Terra -->
+              <article class="debris-card" data-debris="terra">
+                <div class="debris-top">
+                  <span class="debris-ico ico-terra" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18l-3-7-4 3-3-6-4 5-4 5z"/></svg>
+                  </span>
+                  <span class="debris-unit">+0,7 m&sup3;</span>
+                </div>
+                <h3>Terra &amp; Limpeza</h3>
+                <p>Escavação, nivelamento e solo limpo</p>
+                <div class="debris-stepper">
+                  <button type="button" class="step-btn" data-act="sub" aria-label="Remover lote de Terra e Limpeza">&minus;</button>
+                  <strong class="step-count" data-count>0</strong>
+                  <button type="button" class="step-btn step-add" data-act="add" aria-label="Adicionar lote de Terra e Limpeza">+</button>
+                </div>
+              </article>
+
+              <!-- 5. Gesso -->
+              <article class="debris-card" data-debris="gesso">
+                <div class="debris-top">
+                  <span class="debris-ico ico-gesso" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4z"/><path d="M8 7v10"/><path d="M16 7v10"/></svg>
+                  </span>
+                  <span class="debris-unit">+0,7 m&sup3;</span>
+                </div>
+                <h3>Gesso &amp; Acabamento</h3>
+                <p>Drywall, forros, azulejos e pisos</p>
+                <div class="debris-stepper">
+                  <button type="button" class="step-btn" data-act="sub" aria-label="Remover lote de Gesso e Acabamento">&minus;</button>
+                  <strong class="step-count" data-count>0</strong>
+                  <button type="button" class="step-btn step-add" data-act="add" aria-label="Adicionar lote de Gesso e Acabamento">+</button>
+                </div>
+              </article>
+
+              <!-- 6. Demolição -->
+              <article class="debris-card" data-debris="demolicao">
+                <div class="debris-top">
+                  <span class="debris-ico ico-demolicao" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4 20 10 9 21 3 15 14 4z"/><path d="m11 7 6 6"/></svg>
+                  </span>
+                  <span class="debris-unit">+0,7 m&sup3;</span>
+                </div>
+                <h3>Demolição Pesada</h3>
+                <p>Entulho estrutural de alto volume</p>
+                <div class="debris-stepper">
+                  <button type="button" class="step-btn" data-act="sub" aria-label="Remover lote de Demolição Pesada">&minus;</button>
+                  <strong class="step-count" data-count>0</strong>
+                  <button type="button" class="step-btn step-add" data-act="add" aria-label="Adicionar lote de Demolição Pesada">+</button>
+                </div>
               </article>
             </div>
-          </div>
 
-          <div class="cad-stage">
-            <svg id="cadBlueprintSvg" class="cad-svg" viewBox="0 0 680 540" fill="none" role="img" aria-label="Planta CAD técnica da caçamba estacionária 4,2 metros cúbicos e distâncias legais">
-              <!-- Subtle millimeter reference frame -->
-              <rect class="cad-frame" x="16" y="16" width="648" height="508" rx="6" pathLength="1"/>
-              <line class="cad-axis" x1="340" y1="30" x2="340" y2="510" pathLength="1"/>
-
-              <!-- TOP VIEW / SIDE ELEVATION OF 4.2m3 BROOKS DUMPSTER -->
-              <g class="cad-group" data-cad-part="hull">
-                <!-- Ground / asphalt baseline -->
-                <line class="cad-ground" x1="64" y1="312" x2="616" y2="312" pathLength="1"/>
-                <!-- Bottom skids -->
-                <rect class="cad-stroke-dark" x="206" y="298" width="268" height="14" pathLength="1"/>
-                <!-- Main trapezoid body -->
-                <polygon class="cad-hull-fill" points="196,298 484,298 548,142 132,158"/>
-                <polygon class="cad-stroke-main" points="196,298 484,298 548,142 132,158" pathLength="1"/>
-                <!-- Reinforced top rim -->
-                <polygon class="cad-stroke-main" points="124,146 556,130 556,144 124,160" pathLength="1"/>
-                <!-- Structural ribs -->
-                <line class="cad-stroke-detail" x1="212" y1="296" x2="180" y2="156" pathLength="1"/>
-                <line class="cad-stroke-detail" x1="468" y1="296" x2="500" y2="144" pathLength="1"/>
-                <!-- Lifting pins -->
-                <circle class="cad-pin-circle" cx="176" cy="212" r="10" pathLength="1"/>
-                <circle class="cad-pin-circle" cx="504" cy="204" r="10" pathLength="1"/>
-                <circle class="cad-pin-circle" cx="476" cy="274" r="9" pathLength="1"/>
-                <!-- Stencil label inside CAD -->
-                <text class="cad-brand-txt" x="340" y="226" text-anchor="middle">JL CAÇAMBAS · 4,2 m³</text>
-                <text class="cad-sub-txt" x="340" y="250" text-anchor="middle">CCM 139.7421 · AMARELO LEI 097/2017</text>
-              </g>
-
-              <!-- RIM LIMIT WARNING LINE (Lei 46.594/2005) -->
-              <g class="cad-group" data-cad-part="limit">
-                <line class="cad-limit-line" x1="92" y1="138" x2="588" y2="122" pathLength="1"/>
-                <rect x="210" y="96" width="260" height="24" rx="4" fill="#0A214E"/>
-                <text class="cad-badge-txt" x="340" y="112" text-anchor="middle">LIMITE MÁXIMO DE ENTULHO (BORDA)</text>
-              </g>
-
-              <!-- DIMENSIONS (COTAS) -->
-              <g class="cad-group" data-cad-part="dims">
-                <!-- Top width 2,68m -->
-                <line class="cad-cota" x1="124" y1="74" x2="556" y2="74" pathLength="1"/>
-                <line class="cad-cota" x1="124" y1="64" x2="124" y2="84" pathLength="1"/>
-                <line class="cad-cota" x1="556" y1="64" x2="556" y2="84" pathLength="1"/>
-                <text class="cad-dim-txt" x="340" y="64" text-anchor="middle">2,68 m (COMPRIMENTO BOCA)</text>
-
-                <!-- Height 1,22m -->
-                <line class="cad-cota" x1="596" y1="130" x2="596" y2="312" pathLength="1"/>
-                <line class="cad-cota" x1="586" y1="130" x2="606" y2="130" pathLength="1"/>
-                <line class="cad-cota" x1="586" y1="312" x2="606" y2="312" pathLength="1"/>
-                <text class="cad-dim-txt" x="614" y="226" transform="rotate(90 614 226)" text-anchor="middle">1,22 m ALT.</text>
-              </g>
-
-              <!-- STREET PLACEMENT PLAN (30cm CURB + 10m CORNER) -->
-              <g class="cad-group" data-cad-part="street">
-                <!-- Sidewalk zone -->
-                <rect class="cad-sidewalk" x="56" y="362" width="568" height="44" pathLength="1"/>
-                <text class="cad-street-label" x="72" y="388">CALÇADA (PROIBIDO OBSTRUIR)</text>
-                <!-- Curb line -->
-                <line class="cad-curb" x1="56" y1="406" x2="624" y2="406" pathLength="1"/>
-                <!-- 30cm clearance marker -->
-                <line class="cad-cota-eco" x1="252" y1="406" x2="252" y2="426" pathLength="1"/>
-                <text class="cad-eco-txt" x="152" y="422" text-anchor="middle">MAX. 30 cm MEIO-FIO</text>
-                <!-- Dumpster top-down footprint in legal parking lane -->
-                <rect class="cad-footprint" x="234" y="426" width="184" height="62" rx="4" pathLength="1"/>
-                <text class="cad-brand-sm" x="326" y="462" text-anchor="middle">4,2 m³ · 1,60 m LARG.</text>
-                <!-- Corner distance callout -->
-                <line class="cad-cota-eco" x1="418" y1="458" x2="612" y2="458" pathLength="1"/>
-                <line class="cad-cota-eco" x1="612" y1="432" x2="612" y2="484" pathLength="1"/>
-                <text class="cad-eco-txt" x="515" y="448" text-anchor="middle">&ge; 10 m ESQUINA</text>
-                <text class="cad-sub-txt" x="515" y="476" text-anchor="middle">&ge; 5 m ALINHAMENTO</text>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         ACT 04: DISCRETE 5-STEP STATE MACHINE (.s-evp) + 3D FULL FILL,
-                 TARP COVERAGE (LEI 097/2017) & HYDRAULIC LIFT!
-         ==================================================================== -->
-    <section id="operacao" class="scene s-evp" data-theme="dark" data-chapter="04" data-chapter-title="Operação em 5 Etapas">
-      <div class="pin evp-pin">
-        <div class="wrap-wide evp-layout">
-          <div class="evp-left">
-            <span class="kicker kicker-yellow"><b>04</b> DO PEDIDO À RETIRADA LEGAL</span>
-
-            <div class="evp-progress-pills" role="tablist" aria-label="Etapas da operação JL Caçambas">
-              <button type="button" class="evp-pill is-active" data-evp-jump="0">01 Pedido</button>
-              <button type="button" class="evp-pill" data-evp-jump="1">02 Posição</button>
-              <button type="button" class="evp-pill" data-evp-jump="2">03 Carga 4,2 m&sup3;</button>
-              <button type="button" class="evp-pill" data-evp-jump="3">04 Lona</button>
-              <button type="button" class="evp-pill" data-evp-jump="4">05 Retirada</button>
-            </div>
-
-            <div class="evp-stage-box">
-              <div class="evp-slide is-active" data-evp-step="0">
-                <span class="evp-num">ETAPA 01 / 05</span>
-                <h2 class="evp-title">Um WhatsApp e a caçamba <em>já entra na rota.</em></h2>
-                <p class="evp-desc">Sem burocracia nem formulário infinito. Informe seu bairro em Indaiatuba e o tipo de resíduo pelo canal oficial <strong>(19) 98968-9696</strong> ou fixo <strong>(19) 3017-4670</strong>.</p>
-                <div class="evp-meta"><span>ATENDIMENTO SEG–SEX 07H–16H</span><span>SÁB 07H–11H</span></div>
-              </div>
-
-              <div class="evp-slide" data-evp-step="1">
-                <span class="evp-num">ETAPA 02 / 05</span>
-                <h2 class="evp-title">Posicionamento técnico <em>sem dor de cabeça.</em></h2>
-                <p class="evp-desc">Nossos motoristas experientes posicionam a caçamba amarela cadastrada respeitando o afastamento de 30 cm do meio-fio, garagens, hidrantes e distância mínima de esquinas.</p>
-                <div class="evp-meta"><span>CCM 139.7421</span><span>FAIXAS REFLETIVAS</span></div>
-              </div>
-
-              <div class="evp-slide" data-evp-step="2">
-                <span class="evp-num">ETAPA 03 / 05</span>
-                <h2 class="evp-title">Enchimento completo até <em>4,2 m&sup3; na borda.</em></h2>
-                <p class="evp-desc">Acompanhe ao lado as camadas finais completando o volume útil de 4,2 m&sup3;. Respeitar a linha da borda (Lei 46.594/2005) garante transporte seguro sem risco de queda de entulho.</p>
-                <div class="evp-meta"><span>4,2 m&sup3; ÚTEIS</span><span>LEI 46.594/2005</span></div>
-              </div>
-
-              <div class="evp-slide" data-evp-step="3">
-                <span class="evp-num">ETAPA 04 / 05</span>
-                <h2 class="evp-title">Cobertura total com <em>lona obrigatória.</em></h2>
-                <p class="evp-desc">Antes de o caminhão sair da sua rua, nossa equipe cobre integralmente a carga com lona tensionada, cumprindo à risca a <strong>Lei Municipal 097/2017</strong> de Indaiatuba.</p>
-                <div class="evp-meta"><span>LONA TENSIONADA</span><span>ZERO POEIRA NA VIA</span></div>
-              </div>
-
-              <div class="evp-slide" data-evp-step="4">
-                <span class="evp-num">ETAPA 05 / 05</span>
-                <h2 class="evp-title">Içamento hidráulico e <em>destinação correta.</em></h2>
-                <p class="evp-desc">Poliguindaste próprio recolhe a caçamba no prazo combinado e encaminha os resíduos de construção civil para área licenciada. Sua rua limpa, sua obra 100% regular.</p>
-                <div class="evp-meta"><span>FROTA PRÓPRIA</span><span>DESCARTE AMBIENTAL LEGAL</span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="evp-right-spacer" aria-hidden="true">
-            <div class="evp-3d-frame">
-              <span class="evp-corner tl"></span>
-              <span class="evp-corner tr"></span>
-              <span class="evp-corner bl"></span>
-              <span class="evp-corner br"></span>
-              <div class="evp-3d-caption" id="evp3dCaption">MODO 3D &middot; ARRASTE PARA INSPECIONAR</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         ACT 05: HORIZONTAL FLEET GALLERY + SERVICES + 10 REAL B2B PARTNERS
-         ==================================================================== -->
-    <section id="frota" class="scene s-frota" data-theme="light" data-chapter="05" data-chapter-title="Frota &amp; Parceiros">
-      <div class="wrap-wide frota-head">
-        <div>
-          <span class="kicker"><b>05</b> INFRAESTRUTURA REAL EM INDAIATUBA</span>
-          <h2 class="t-l">Frota própria, <em>Munck</em> e equipamentos prontos para campo.</h2>
-        </div>
-        <p class="frota-sub">Sem terceirização opaca. Fotos reais dos nossos caminhões poliguindaste, caçambas cadastradas e operações em obras de Indaiatuba.</p>
-      </div>
-
-      <!-- Horizontal Staggered Fleet Track -->
-      <div class="fleet-track-wrap" id="fleetTrackWrap">
-        <div class="fleet-track" id="fleetTrack">
-          <figure class="fleet-card fc-tall">
-            <img src="./assets/img/icamento-poliguindaste.jpg" alt="Caçamba amarela da JL Caçambas sendo içada por correntes do poliguindaste" loading="lazy">
-            <figcaption><b>01</b><span>Içamento Poliguindaste &middot; Caçamba 4,2 m&sup3;</span></figcaption>
-          </figure>
-
-          <figure class="fleet-card fc-wide">
-            <img src="./assets/img/cacambas-fileira.jpg" alt="Fileira de caçambas estacionárias amarelas identificadas da JL Caçambas" loading="lazy">
-            <figcaption><b>02</b><span>Estoque Ativo &middot; Amarelo Lei 097/2017</span></figcaption>
-          </figure>
-
-          <figure class="fleet-card">
-            <img src="./assets/img/caminhao-lona-lei097.jpg" alt="Caminhão Mercedes-Benz da JL Caçambas transportando caçamba coberta com lona" loading="lazy">
-            <figcaption><b>03</b><span>Transporte Coberto com Lona &middot; Indaiatuba</span></figcaption>
-          </figure>
-
-          <figure class="fleet-card fc-tall">
-            <img src="./assets/img/frota-patio.jpg" alt="Frota de caminhões poliguindaste da JL Caçambas estacionada na base" loading="lazy">
-            <figcaption><b>04</b><span>Base DIMPE II &middot; Frota Própria Pronta</span></figcaption>
-          </figure>
-
-          <figure class="fleet-card">
-            <img src="./assets/img/cacamba-obra-residencial.jpg" alt="Caçamba da JL Caçambas posicionada em obra residencial em Indaiatuba" loading="lazy">
-            <figcaption><b>05</b><span>Obras Residenciais &amp; Reformas</span></figcaption>
-          </figure>
-
-          <figure class="fleet-card fc-wide">
-            <img src="./assets/img/entrega-via-publica.jpg" alt="Entrega pontual de caçamba em via pública de Indaiatuba" loading="lazy">
-            <figcaption><b>06</b><span>Entrega Pontual em Toda Indaiatuba e Região</span></figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <!-- 4 Real Service Lines -->
-      <div class="wrap-wide services-grid">
-        <article class="srv-card" data-reveal>
-          <span class="srv-idx">01</span>
-          <h3>Caçambas Estacionárias 4,2 m&sup3;</h3>
-          <p>Remoção ágil de entulho de construção civil, reformas e demolições com unidades cadastradas e dentro da norma municipal.</p>
-          <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Gostaria%20de%20or%C3%A7amento%20para%20Aluguel%20de%20Ca%C3%A7amba%204%2C2m%C2%B3.%20%5BRef%3A%20Servicos%5D" target="_blank" rel="noopener noreferrer" class="srv-link">Cotar Caçamba &rarr;</a>
-        </article>
-
-        <article class="srv-card" data-reveal>
-          <span class="srv-idx">02</span>
-          <h3>Caminhão Munck</h3>
-          <p>Içamento, carga, descarga e transporte técnico de máquinas, estruturas metálicas, geradores e materiais pesados em obra ou fábrica.</p>
-          <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas%20e%20Munck!%20Preciso%20de%20or%C3%A7amento%20para%20Loca%C3%A7%C3%A3o%20de%20Caminh%C3%A3o%20Munck.%20%5BRef%3A%20Servicos%5D" target="_blank" rel="noopener noreferrer" class="srv-link">Cotar Munck &rarr;</a>
-        </article>
-
-        <article class="srv-card" data-reveal>
-          <span class="srv-idx">03</span>
-          <h3>Empilhadeiras</h3>
-          <p>Locação de empilhadeiras para movimentação logística de pallets e cargas em indústrias, galpões e canteiros de Indaiatuba.</p>
-          <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Loca%C3%A7%C3%A3o!%20Quero%20informa%C3%A7%C3%B5es%20sobre%20Loca%C3%A7%C3%A3o%20de%20Empilhadeira.%20%5BRef%3A%20Servicos%5D" target="_blank" rel="noopener noreferrer" class="srv-link">Cotar Empilhadeira &rarr;</a>
-        </article>
-
-        <article class="srv-card srv-card-navy" data-reveal>
-          <span class="srv-idx">04</span>
-          <h3>Planos Corporativos B2B</h3>
-          <p>Prazos diferenciados, trocas programadas e atendimento dedicado para construtoras, engenharias e indústrias do polo de Indaiatuba.</p>
-          <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Represento%20uma%20empresa%20e%20quero%20conhecer%20os%20planos%20corporativos%20B2B.%20%5BRef%3A%20Servicos-B2B%5D" target="_blank" rel="noopener noreferrer" class="srv-link">Atendimento Empresas &rarr;</a>
-        </article>
-      </div>
-
-      <!-- 10 Authentic B2B Partners of JL Cacambas Indaiatuba -->
-      <div class="wrap-wide partners-block">
-        <div class="partners-head">
-          <span class="kicker">PARCEIROS QUE CONFIAM NA JL CAÇAMBAS</span>
-          <p>Empresas, construtoras, shoppings e indústrias que operam conosco em Indaiatuba.</p>
-        </div>
-        <div class="partners-grid">
-          <div class="partner-tile"><img src="./assets/img/partners/polo-shopping-indaiatuba.png" alt="Polo Shopping Indaiatuba" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/mrv-engenharia.png" alt="MRV Engenharia" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/schott.png" alt="SCHOTT" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/tmd-friction.png" alt="TMD Friction" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/sonda-supermercados.png" alt="Sonda Supermercados" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/hcon-engenharia.png" alt="HCON Engenharia" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/arboreal.png" alt="ArboReal" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/italo-decor.png" alt="Italo Decor" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/marmoraria-prime.png" alt="Marmoraria Prime" loading="lazy"></div>
-          <div class="partner-tile"><img src="./assets/img/partners/grupo-vasconcelos.png" alt="Grupo Vasconcelos" loading="lazy"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         ACT 06: ARCHETYPE A CHAMELEON WORK CONFIGURATOR (GSAP FLIP)
-                 + CONTEXTUAL WHATSAPP DISPATCHER (19) 98968-9696
-         ==================================================================== -->
-    <section id="simulador" class="scene s-sim" data-theme="dark" data-chapter="06" data-chapter-title="Simulador de Obra">
-      <div class="wrap-wide sim-layout">
-        <div class="sim-header">
-          <span class="kicker kicker-yellow"><b>06</b> DESPACHO RÁPIDO &middot; SEM PERDER TEMPO</span>
-          <h2 class="t-l">Configure sua obra e peça direto no <em>WhatsApp oficial.</em></h2>
-        </div>
-
-        <div class="sim-shell" id="simShell" data-profile="reforma">
-          <!-- Left: Chameleon Profile & Parameters -->
-          <div class="sim-controls">
-            <div class="sim-group">
-              <label class="sim-label">1. Tipo de necessidade</label>
-              <div class="sim-tabs" id="simProfileTabs" role="tablist">
-                <button type="button" class="sim-tab is-active" data-profile-btn="reforma">
-                  <span>Reforma Residencial</span>
-                  <small>Piso, parede, banheiro</small>
-                </button>
-                <button type="button" class="sim-tab" data-profile-btn="construcao">
-                  <span>Construção Nova</span>
-                  <small>Trocas contínuas na obra</small>
-                </button>
-                <button type="button" class="sim-tab" data-profile-btn="demolicao">
-                  <span>Demolição / Limpeza</span>
-                  <small>Alto volume de entulho</small>
-                </button>
-                <button type="button" class="sim-tab" data-profile-btn="industrial">
-                  <span>Indústria / Munck</span>
-                  <small>B2B, Munck, Empilhadeira</small>
-                </button>
-              </div>
-            </div>
-
-            <div class="sim-row-2">
-              <div class="sim-group">
-                <label class="sim-label" for="simBairro">2. Bairro em Indaiatuba / Região</label>
-                <select id="simBairro" class="sim-select">
+            <!-- Delivery Params (Bairro + Quantidade + Reset) -->
+            <div class="builder-params">
+              <div class="param-field">
+                <label for="builderBairro">Bairro em Indaiatuba / Região</label>
+                <select id="builderBairro" class="param-select">
                   <option value="Jardim Morada do Sol">Jardim Morada do Sol</option>
                   <option value="Cidade Nova">Cidade Nova</option>
                   <option value="Centro / Vila Todos os Santos">Centro / Vila Todos os Santos</option>
                   <option value="Parque Ecológico / Jd. Esplanada">Parque Ecológico / Jd. Esplanada</option>
-                  <option value="Distrito Industrial (DIMPE)">Distrito Industrial (DIMPE)</option>
+                  <option value="Distrito Industrial (DIMPE II)">Distrito Industrial (DIMPE II)</option>
                   <option value="Itaici / Helvétia">Itaici / Helvétia</option>
                   <option value="Jardim Pau Preto / Jd. Paulista">Jardim Pau Preto / Jd. Paulista</option>
-                  <option value="Outro bairro de Indaiatuba ou Região">Outro bairro de Indaiatuba / Região</option>
+                  <option value="Outro bairro de Indaiatuba ou Região">Outro bairro de Indaiatuba ou Região</option>
                 </select>
               </div>
 
-              <div class="sim-group">
-                <label class="sim-label" for="simResiduo">3. Material predominante</label>
-                <select id="simResiduo" class="sim-select">
-                  <option value="Alvenaria, tijolos e concreto">Alvenaria, tijolos e concreto</option>
-                  <option value="Terra e entulho misto de obra">Terra e entulho misto de obra</option>
-                  <option value="Madeira, gesso e acabamento">Madeira, gesso e acabamento</option>
-                  <option value="Içamento / Movimentação (Munck ou Empilhadeira)">Içamento / Movimentação (Munck / Empilhadeira)</option>
-                </select>
+              <div class="param-field">
+                <span class="param-label-txt">Quantidade de caçambas</span>
+                <div class="qty-pills" id="builderQtyRow" role="group" aria-label="Quantidade de caçambas">
+                  <button type="button" class="qty-pill is-active" data-qty="1">1x</button>
+                  <button type="button" class="qty-pill" data-qty="2">2x</button>
+                  <button type="button" class="qty-pill" data-qty="3">3x</button>
+                  <button type="button" class="qty-pill" data-qty="4">4+ B2B</button>
+                </div>
               </div>
-            </div>
 
-            <div class="sim-group">
-              <label class="sim-label">4. Quantidade estimada de caçambas (4,2 m&sup3; cada)</label>
-              <div class="sim-qty-row" id="simQtyRow">
-                <button type="button" class="qty-btn is-active" data-qty="1">1 caçamba <b>4,2 m&sup3;</b></button>
-                <button type="button" class="qty-btn" data-qty="2">2 caçambas <b>8,4 m&sup3;</b></button>
-                <button type="button" class="qty-btn" data-qty="3">3 caçambas <b>12,6 m&sup3;</b></button>
-                <button type="button" class="qty-btn" data-qty="4">4+ / Contrato B2B</button>
+              <div class="param-utils">
+                <button type="button" id="builderFillAllBtn" class="util-btn">Encher 4,2 m&sup3; agora</button>
+                <button type="button" id="builderResetBtn" class="util-btn util-btn-ghost">Esvaziar</button>
               </div>
             </div>
           </div>
 
-          <!-- Right: Live Chameleon Split Card with GSAP Flip Visual Spec -->
-          <div class="sim-preview" id="simPreview">
-            <div class="sim-preview-top">
-              <span class="sim-badge" id="simBadge">REFORMA RESIDENCIAL</span>
-              <span class="sim-vol-pill" id="simVolPill">4,2 m&sup3;</span>
-            </div>
+          <!-- Right Column: Double-Bezel Sticky 3D PBR Live Stage -->
+          <div class="builder-right">
+            <div class="bezel-outer bezel-light">
+              <div class="bezel-inner builder-console">
+                <div class="console-top">
+                  <span class="console-badge" id="builderStatusBadge">CAÇAMBA PRONTA &middot; ADICIONE LOTES</span>
+                  <div class="console-vol">
+                    <strong id="builderVolumeVal">0,0 m&sup3;</strong>
+                    <span>/ 4,2 m&sup3;</span>
+                  </div>
+                </div>
 
-            <div class="sim-visual-stage">
-              <img id="simVisualImg" src="./assets/img/cacamba-3d-render.png" alt="Render 3D da caçamba 4,2 metros cúbicos da JL Caçambas">
-            </div>
+                <!-- 6-Slot Fill Meter -->
+                <div class="console-meter" aria-label="Nível de enchimento da caçamba">
+                  <span class="meter-seg" data-seg="0"></span>
+                  <span class="meter-seg" data-seg="1"></span>
+                  <span class="meter-seg" data-seg="2"></span>
+                  <span class="meter-seg" data-seg="3"></span>
+                  <span class="meter-seg" data-seg="4"></span>
+                  <span class="meter-seg" data-seg="5"></span>
+                </div>
 
-            <h3 id="simSpecTitle">1 Caçamba Estacionária 4,2 m&sup3;</h3>
-            <p id="simSpecDesc">Ideal para reforma de banheiro, cozinha, troca de pisos ou abertura de paredes. Entregue na vaga regulamentada sem obstruir a calçada.</p>
+                <!-- Live 3D PBR Blender Dumpster Canvas (360 Drag) -->
+                <div id="builder3dStage" class="builder-3d-stage">
+                  <canvas id="builderCanvas" aria-label="Visualização 3D interativa da caçamba 4,2 m³ da JL Caçambas"></canvas>
+                  <span class="stage-drag-cue" aria-hidden="true">ARRASTE 360&deg;</span>
+                </div>
 
-            <!-- Composition / Rules Micro-Icon Strip (Archetype A signature, zero emojis) -->
-            <ul class="sim-icons" aria-label="Garantias inclusas">
-              <li>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span>Lei 097/2017</span>
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="11" rx="2"/><path d="M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg>
-                <span>Com Lona</span>
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-                <span>Entrega Ágil</span>
-              </li>
-              <li>
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span id="simBairroTag">Jd. Morada do Sol</span>
-              </li>
-            </ul>
+                <!-- 5-Step Operation One-Click Cycle Bar -->
+                <div class="builder-steps" role="tablist" aria-label="Ciclo operacional em 5 etapas">
+                  <button type="button" class="bstep-btn is-active" data-bstep="0"><b>01</b><span>Pedido</span></button>
+                  <button type="button" class="bstep-btn" data-bstep="1"><b>02</b><span>Posição 30cm</span></button>
+                  <button type="button" class="bstep-btn" data-bstep="2"><b>03</b><span>Carga 4,2 m&sup3;</span></button>
+                  <button type="button" class="bstep-btn" data-bstep="3"><b>04</b><span>Lona</span></button>
+                  <button type="button" class="bstep-btn" data-bstep="4"><b>05</b><span>Içamento</span></button>
+                </div>
 
-            <div class="sim-msg-preview" id="simMsgPreview"></div>
+                <!-- Live Action Footer -->
+                <div class="console-foot">
+                  <p class="console-summary" id="builderSummary">Selecione resíduos à esquerda ou clique nas etapas acima para simular sua entrega.</p>
 
-            <div class="sim-actions">
-              <a id="simWaBtn" href="https://wa.me/5519989689696" target="_blank" rel="noopener noreferrer" class="btn-yellow btn-full">
-                Enviar Pedido no WhatsApp (19) 98968-9696 &rarr;
-              </a>
-              <a href="tel:+551930174670" class="btn-ghost-dark btn-full">Ligar no Fixo: (19) 3017-4670</a>
+                  <div class="console-actions">
+                    <button type="button" id="builderHoistBtn" class="btn-hoist" aria-pressed="false">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+                      <span>Testar Içamento</span>
+                    </button>
+
+                    <a id="builderWaBtn" href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Montei%20minha%20ca%C3%A7amba%20no%20site%20oficial%20e%20quero%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-yellow btn-full">
+                      <span class="btn-label">Pedir no WhatsApp (19) 98968-9696</span>
+                      <span class="btn-orb" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -698,104 +660,309 @@
     </section>
 
     <!-- ====================================================================
-         ACT 07: ANIMATED STRIKETHROUGH MANIFESTO (--strike: 0 -> 1)
+         ACT 05: GRAPHITE (#11141B) — CAD BLUEPRINT + PANORAMIC FLEET + 10 PARTNERS
          ==================================================================== -->
-    <section id="compromisso" class="scene s-strike" data-theme="navy" data-chapter="07" data-chapter-title="O Que Eliminamos">
-      <div class="wrap-wide strike-wrap">
-        <span class="kicker kicker-yellow"><b>07</b> CRITÉRIOS INEGOCIÁVEIS EM INDAIATUBA</span>
-        <h2 class="t-l">O que <em>não entra</em> na nossa operação.</h2>
+    <section id="especificacao" class="act act-spec" data-theme="dark" data-chapter="05" data-chapter-title="Leis, Frota &amp; Parceiros">
+      <!-- Block A: Animated CAD Technical Blueprint + Municipal Laws -->
+      <div class="wrap spec-cad-block">
+        <div class="spec-cad-head">
+          <p class="eyebrow">CONFORMIDADE MUNICIPAL &middot; INDAIATUBA / SP</p>
+          <h2 class="display-xl">PLANTA TÉCNICA <span class="hl">4,2 m&sup3;</span> &amp; LEIS EM VIGOR.</h2>
+        </div>
 
-        <ul class="strike-list">
-          <li class="strike-item"><s>Atraso na entrega que paralisa o pedreiro e a betoneira.</s></li>
-          <li class="strike-item"><s>Descarte clandestino gerando multa ambiental no seu CPF ou CNPJ.</s></li>
-          <li class="strike-item"><s>Anúncios falsos e golpes cobrando fora do nosso WhatsApp oficial.</s></li>
-          <li class="strike-item"><s>Caçamba sem identificação, sem refletivo ou fora da Lei 097/2017.</s></li>
-          <li class="strike-item"><s>Transporte sem lona espalhando poeira e cacos pela rua.</s></li>
-        </ul>
+        <div class="cad-grid">
+          <div class="cad-laws">
+            <article class="law-panel" data-reveal>
+              <span class="law-badge">LEI 46.594/2005</span>
+              <h3>Posicionamento &amp; Limite da Borda</h3>
+              <ul>
+                <li>Capacidade útil <strong>4,2 m&sup3;</strong> — o entulho nunca pode ultrapassar a borda superior.</li>
+                <li>Distância máxima de <strong>30 cm do meio-fio</strong> em vaga regulamentada.</li>
+                <li>Mínimo de <strong>10 m da esquina</strong>; proibida sobre calçadas, hidrantes, zona azul ou faixa amarela.</li>
+              </ul>
+            </article>
+
+            <article class="law-panel law-panel-eco" data-reveal>
+              <span class="law-badge law-badge-eco">LEI MUNICIPAL 097/2017 &middot; INDAIATUBA</span>
+              <h3>Sinalização &amp; Cobertura Obrigatória</h3>
+              <ul>
+                <li>Pintura em <strong>amarelo fosforescente</strong> com faixas refletivas nas laterais.</li>
+                <li>Transporte <strong>100% coberto por lona</strong> evitando poeira e queda de detritos.</li>
+                <li>Numeração cadastrada (<strong>CCM 139.7421</strong>) e distância mínima de <strong>5 m do alinhamento</strong> em cruzamentos.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="bezel-outer bezel-dark">
+            <div class="bezel-inner cad-blueprint-frame">
+              <div class="cad-meta-bar">
+                <span>DESENHO TÉCNICO &middot; ESCALA REAL BROOKS 4,2 m&sup3;</span>
+                <span>CCM 139.7421</span>
+              </div>
+              <svg id="cadBlueprintSvg" class="cad-svg" viewBox="0 0 680 540" fill="none" role="img" aria-label="Planta CAD técnica da caçamba 4,2 metros cúbicos e distâncias exigidas pelas leis de Indaiatuba">
+                <rect class="cad-frame" x="16" y="16" width="648" height="508" rx="6" pathLength="1"/>
+                <line class="cad-axis" x1="340" y1="30" x2="340" y2="510" pathLength="1"/>
+
+                <g class="cad-group" data-cad-part="hull">
+                  <line class="cad-ground" x1="64" y1="312" x2="616" y2="312" pathLength="1"/>
+                  <rect class="cad-stroke-sub" x="206" y="298" width="268" height="14" pathLength="1"/>
+                  <polygon class="cad-hull-fill" points="196,298 484,298 548,142 132,158"/>
+                  <polygon class="cad-stroke-main" points="196,298 484,298 548,142 132,158" pathLength="1"/>
+                  <polygon class="cad-stroke-main" points="124,146 556,130 556,144 124,160" pathLength="1"/>
+                  <line class="cad-stroke-detail" x1="212" y1="296" x2="180" y2="156" pathLength="1"/>
+                  <line class="cad-stroke-detail" x1="468" y1="296" x2="500" y2="144" pathLength="1"/>
+                  <circle class="cad-pin-circle" cx="176" cy="212" r="10" pathLength="1"/>
+                  <circle class="cad-pin-circle" cx="504" cy="204" r="10" pathLength="1"/>
+                  <circle class="cad-pin-circle" cx="476" cy="274" r="9" pathLength="1"/>
+                  <text class="cad-brand-txt" x="340" y="224" text-anchor="middle">JL CAÇAMBAS · 4,2 m³</text>
+                  <text class="cad-sub-txt" x="340" y="248" text-anchor="middle">CCM 139.7421 · AMARELO LEI 097/2017</text>
+                </g>
+
+                <g class="cad-group" data-cad-part="limit">
+                  <line class="cad-limit-line" x1="92" y1="138" x2="588" y2="122" pathLength="1"/>
+                  <rect class="cad-badge-rect" x="198" y="94" width="284" height="24" rx="4"/>
+                  <text class="cad-badge-txt" x="340" y="110" text-anchor="middle">LIMITE MÁXIMO DE ENTULHO (BORDA)</text>
+                </g>
+
+                <g class="cad-group" data-cad-part="dims">
+                  <line class="cad-cota" x1="124" y1="72" x2="556" y2="72" pathLength="1"/>
+                  <line class="cad-cota" x1="124" y1="62" x2="124" y2="82" pathLength="1"/>
+                  <line class="cad-cota" x1="556" y1="62" x2="556" y2="82" pathLength="1"/>
+                  <text class="cad-dim-txt" x="340" y="62" text-anchor="middle">2,68 m (COMPRIMENTO BOCA)</text>
+
+                  <line class="cad-cota" x1="596" y1="130" x2="596" y2="312" pathLength="1"/>
+                  <line class="cad-cota" x1="586" y1="130" x2="606" y2="130" pathLength="1"/>
+                  <line class="cad-cota" x1="586" y1="312" x2="606" y2="312" pathLength="1"/>
+                  <text class="cad-dim-txt" x="615" y="226" transform="rotate(90 615 226)" text-anchor="middle">1,22 m ALT.</text>
+                </g>
+
+                <g class="cad-group" data-cad-part="street">
+                  <rect class="cad-sidewalk" x="56" y="362" width="568" height="44" pathLength="1"/>
+                  <text class="cad-street-label" x="72" y="388">CALÇADA (PROIBIDO OBSTRUIR)</text>
+                  <line class="cad-curb" x1="56" y1="406" x2="624" y2="406" pathLength="1"/>
+                  <line class="cad-cota-eco" x1="252" y1="406" x2="252" y2="426" pathLength="1"/>
+                  <text class="cad-eco-txt" x="152" y="422" text-anchor="middle">MAX. 30 cm MEIO-FIO</text>
+                  <rect class="cad-footprint" x="234" y="426" width="184" height="62" rx="4" pathLength="1"/>
+                  <text class="cad-brand-sm" x="326" y="462" text-anchor="middle">4,2 m³ · 1,60 m LARG.</text>
+                  <line class="cad-cota-eco" x1="418" y1="458" x2="612" y2="458" pathLength="1"/>
+                  <line class="cad-cota-eco" x1="612" y1="432" x2="612" y2="484" pathLength="1"/>
+                  <text class="cad-eco-txt" x="515" y="448" text-anchor="middle">&ge; 10 m ESQUINA</text>
+                  <text class="cad-sub-txt" x="515" y="476" text-anchor="middle">&ge; 5 m ALINHAMENTO</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block B: Panoramic Fleet Showcase (2.6:1 Natural Ratio) + Horizontal Photo Strip -->
+      <div class="wrap fleet-block">
+        <div class="fleet-top-row">
+          <h3 class="display-md">FROTA PRÓPRIA EM CAMPO <span class="hl">EM INDAIATUBA.</span></h3>
+          <div class="fleet-strip-arrows">
+            <button type="button" class="strip-btn" id="fleetPrevBtn" aria-label="Ver fotos anteriores da frota">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            </button>
+            <button type="button" class="strip-btn" id="fleetNextBtn" aria-label="Ver próximas fotos da frota">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Panoramic Hero Image in True Wide Aspect Ratio (1600x583) -->
+        <figure class="fleet-panorama" data-reveal>
+          <img src="./assets/img/frota-parque-ecologico.jpg" alt="Caminhão poliguindaste da JL Caçambas operando em frente ao Parque Ecológico de Indaiatuba">
+          <figcaption>
+            <span>OPERAÇÃO REAL &middot; PARQUE ECOLÓGICO DE INDAIATUBA</span>
+            <strong>BASE DIMPE II &middot; DESDE 2013</strong>
+          </figcaption>
+        </figure>
+
+        <!-- Horizontal Sliding Fleet Strip (Other 5 Real Photos) -->
+        <div class="fleet-strip" id="fleetStrip">
+          <figure class="fleet-tile">
+            <img src="./assets/img/icamento-poliguindaste.jpg" alt="Caçamba 4,2 m³ sendo içada por correntes do poliguindaste">
+            <figcaption><b>01</b><span>Içamento Poliguindaste</span></figcaption>
+          </figure>
+          <figure class="fleet-tile">
+            <img src="./assets/img/cacambas-fileira.jpg" alt="Fileira de caçambas estacionárias amarelas identificadas">
+            <figcaption><b>02</b><span>Estoque Ativo 4,2 m&sup3;</span></figcaption>
+          </figure>
+          <figure class="fleet-tile">
+            <img src="./assets/img/caminhao-lona-lei097.jpg" alt="Caminhão transportando caçamba coberta com lona pela Lei 097/2017">
+            <figcaption><b>03</b><span>Cobertura Total com Lona</span></figcaption>
+          </figure>
+          <figure class="fleet-tile">
+            <img src="./assets/img/frota-patio.jpg" alt="Frota de caminhões estacionada no pátio do DIMPE II">
+            <figcaption><b>04</b><span>Base Própria DIMPE II</span></figcaption>
+          </figure>
+          <figure class="fleet-tile">
+            <img src="./assets/img/cacamba-obra-residencial.jpg" alt="Caçamba posicionada em obra residencial em Indaiatuba">
+            <figcaption><b>05</b><span>Obras Residenciais &amp; Vias</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Block C: Single Page Marquee — 10 Authentic Local Partners (Logo-Only) -->
+      <div class="partners-band">
+        <div class="wrap">
+          <p class="partners-label">EMPRESAS QUE OPERAM COM A JL EM INDAIATUBA</p>
+        </div>
+        <div class="partners-marquee" aria-label="10 parceiros locais da JL Caçambas">
+          <div class="partners-track">
+            <div class="partner-group">
+              <div class="partner-pill"><img src="./assets/img/partners/polo-shopping-indaiatuba.png" alt="Polo Shopping Indaiatuba"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/mrv-engenharia.png" alt="MRV Engenharia"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/schott.png" alt="SCHOTT"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/tmd-friction.png" alt="TMD Friction"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/sonda-supermercados.png" alt="Sonda Supermercados"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/hcon-engenharia.png" alt="HCON Engenharia"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/arboreal.png" alt="ArboReal"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/italo-decor.png" alt="Italo Decor"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/marmoraria-prime.png" alt="Marmoraria Prime"></div>
+              <div class="partner-pill"><img src="./assets/img/partners/grupo-vasconcelos.png" alt="Grupo Vasconcelos"></div>
+            </div>
+            <div class="partner-group" aria-hidden="true">
+              <div class="partner-pill"><img src="./assets/img/partners/polo-shopping-indaiatuba.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/mrv-engenharia.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/schott.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/tmd-friction.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/sonda-supermercados.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/hcon-engenharia.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/arboreal.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/italo-decor.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/marmoraria-prime.png" alt=""></div>
+              <div class="partner-pill"><img src="./assets/img/partners/grupo-vasconcelos.png" alt=""></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         ACT 08: ANTI-SCAM OFFICIAL VERIFICATION SHIELD + DIMPE II HQ + FOOTER
+         ACT 06: WARM DEEP IRON CLOSER (#3E1008 -> #120806) + HANGING PENDULUM BADGE
          ==================================================================== -->
-    <section id="contato" class="scene s-contact" data-theme="dark" data-chapter="08" data-chapter-title="Canal Oficial">
-      <div class="wrap-wide contact-wrap">
-        <!-- Official Anti-Scam Shield Banner (real pain point from jllocacao.com.br!) -->
-        <div class="antiscam-banner" data-reveal>
-          <div class="antiscam-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <div class="antiscam-copy">
-            <span class="antiscam-kicker">VERIFICAÇÃO DE SEGURANÇA &middot; EVITE GOLPES</span>
-            <h3>Confirme sempre nosso canal oficial antes de fechar</h3>
-            <p>Nosso único WhatsApp oficial é <strong>(19) 98968-9696</strong> e nosso telefone fixo é <strong>(19) 3017-4670</strong>. Entregamos exclusivamente em <strong>Indaiatuba e Região</strong>.</p>
-          </div>
-          <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Estou%20entrando%20em%20contato%20pelo%20canal%20oficial%20verificado%20no%20site." target="_blank" rel="noopener noreferrer" class="btn-yellow">
-            Abrir Canal Oficial
-          </a>
-        </div>
+    <section id="contato" class="act act-warm" data-theme="warm" data-chapter="06" data-chapter-title="Canal Oficial">
+      <div class="wrap contact-grid">
+        <!-- Left Column: Monumental Closer + Anti-Scam Notice + CTAs + 2x2 Info -->
+        <div class="contact-left">
+          <h2 class="display-closer">OBRA LIMPA COMEÇA <span class="hl">EM UMA LIGAÇÃO.</span></h2>
 
-        <div class="contact-hero">
-          <div class="contact-left">
-            <span class="kicker kicker-yellow"><b>08</b> VEM QUE DÁ NEGÓCIO</span>
-            <h2 class="contact-big">Sua obra limpa começa <em>em uma ligação.</em></h2>
-            <div class="contact-cta-group">
-              <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Quero%20agendar%20uma%20ca%C3%A7amba%20em%20Indaiatuba.%20%5BRef%3A%20Rodape%5D" target="_blank" rel="noopener noreferrer" class="btn-yellow btn-lg magnetic-btn">
-                WhatsApp (19) 98968-9696 &rarr;
-              </a>
-              <a href="tel:+551930174670" class="btn-ghost-dark btn-lg">
-                Fixo (19) 3017-4670
-              </a>
+          <div class="bezel-outer bezel-warm">
+            <div class="bezel-inner antiscam-box">
+              <span class="antiscam-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              </span>
+              <div>
+                <strong>Verificação Anti-Golpe &middot; Canal Oficial Único</strong>
+                <p>Nosso único WhatsApp oficial é <strong>(19) 98968-9696</strong> e nosso telefone fixo é <strong>(19) 3017-4670</strong>. Entregamos exclusivamente em <strong>Indaiatuba e Região</strong>.</p>
+              </div>
             </div>
           </div>
 
-          <div class="contact-cards">
-            <div class="info-box">
-              <span class="info-label">ENDEREÇO OPERACIONAL</span>
+          <div class="contact-ctas">
+            <a href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Estou%20chamando%20pelo%20canal%20oficial%20verificado%20do%20site%20para%20solicitar%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-yellow magnetic-btn">
+              <span class="btn-label">WhatsApp (19) 98968-9696</span>
+              <span class="btn-orb" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </a>
+
+            <a href="tel:+551930174670" class="btn-pill btn-pill-warm-ghost magnetic-btn">
+              <span class="btn-label">Fixo (19) 3017-4670</span>
+              <span class="btn-orb" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+            </a>
+          </div>
+
+          <div class="contact-info-grid">
+            <div class="c-info">
+              <span>ENDEREÇO OPERACIONAL</span>
               <strong>Rua Carmem Mendes Mantovani, 38</strong>
               <p>Distrito Industrial (DIMPE II) &middot; Indaiatuba / SP</p>
             </div>
-            <div class="info-box">
-              <span class="info-label">HORÁRIO DE FUNCIONAMENTO</span>
+            <div class="c-info">
+              <span>HORÁRIOS</span>
               <strong>Seg a Sex: 07h00 às 16h00</strong>
               <p>Sábado: 07h00 às 11h00</p>
             </div>
-            <div class="info-box">
-              <span class="info-label">CONTATO DIGITAL</span>
+            <div class="c-info">
+              <span>E-MAIL &amp; INSTAGRAM</span>
               <strong>jlcacambas@jllocacao.com.br</strong>
-              <p><a href="https://www.instagram.com/jl_cacambas/" target="_blank" rel="noopener noreferrer">Instagram @jl_cacambas &nearr;</a></p>
+              <p><a href="https://www.instagram.com/jl_cacambas/" target="_blank" rel="noopener noreferrer">@jl_cacambas &nearr;</a></p>
             </div>
-            <div class="info-box">
-              <span class="info-label">REGISTRO EMPRESARIAL</span>
-              <strong>JL Caçambas e Munck</strong>
-              <p>CNPJ 19.810.393/0001-27 &middot; Desde 2013</p>
+            <div class="c-info">
+              <span>REGISTRO OFICIAL</span>
+              <strong>CNPJ 19.810.393/0001-27</strong>
+              <p>CCM 139.7421 &middot; Vem que dá negócio</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Physics Pendulum Official Verification Badge (#lanyardStage) -->
+        <div id="lanyardStage" class="lanyard-stage">
+          <canvas id="lanyardCord" class="lanyard-cord" aria-hidden="true"></canvas>
+
+          <div id="lanyardCard" class="lanyard-card" tabindex="0" role="region" aria-label="Placa Oficial Verificada JL Caçambas — arraste ou mova para interagir">
+            <div class="lanyard-clasp" aria-hidden="true">
+              <span class="lanyard-ring"></span>
+              <span class="lanyard-slot"></span>
+            </div>
+
+            <div class="lanyard-sheen" aria-hidden="true"></div>
+
+            <div class="lanyard-body">
+              <img src="./assets/img/logo-jl-cacambas-dark.png" alt="JL Caçambas" class="lanyard-logo">
+
+              <span class="lanyard-verified">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                CANAL OFICIAL VERIFICADO
+              </span>
+
+              <div class="lanyard-numbers">
+                <small>WHATSAPP ÚNICO</small>
+                <strong>(19) 98968-9696</strong>
+                <span>FIXO (19) 3017-4670</span>
+              </div>
+
+              <div class="lanyard-divider"></div>
+
+              <div class="lanyard-meta">
+                <span>CCM 139.7421 &middot; CNPJ 19.810.393/0001-27</span>
+                <strong>INDAIATUBA / SP &middot; DESDE 2013</strong>
+              </div>
+
+              <span class="lanyard-drag-hint">ARRASTE A PLACA</span>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Clean Footer (Zero White Box Behind Logo) -->
       <footer class="site-footer">
-        <div class="wrap-wide footer-inner">
+        <div class="wrap footer-inner">
           <div class="footer-brand">
-            <img src="./assets/img/logo-jl-cacambas.png" alt="JL Caçambas" class="footer-logo">
+            <img src="./assets/img/logo-jl-cacambas-dark.png" alt="JL Caçambas" class="footer-logo">
             <span>JL Caçambas e Munck &middot; CNPJ 19.810.393/0001-27 &middot; Indaiatuba / SP</span>
           </div>
-          <div class="footer-links">
+          <nav class="footer-links" aria-label="Links do rodapé">
             <a href="#topo">Topo</a>
-            <a href="#especificacao">Legislação</a>
-            <a href="#frota">Frota &amp; Munck</a>
-            <a href="#simulador">Simulador</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#showroom">Showroom</a>
+            <a href="#simulador">Montar 4,2 m&sup3;</a>
+            <a href="#especificacao">Leis &amp; Frota</a>
             <a href="https://www.instagram.com/jl_cacambas/" target="_blank" rel="noopener noreferrer">@jl_cacambas</a>
-          </div>
+          </nav>
         </div>
       </footer>
     </section>
 
   </main>
 
-  <!-- Floating Contextual WhatsApp Action (discreet industrial pill) -->
-  <a id="floatingWa" class="wa-float" href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Estou%20no%20site%20oficial%20e%20preciso%20de%20uma%20ca%C3%A7amba%20em%20Indaiatuba." target="_blank" rel="noopener noreferrer" aria-label="Chamar JL Caçambas no WhatsApp (19) 98968-9696">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <!-- Floating Discreet WhatsApp Action (hides on Act 06 where full CTAs live) -->
+  <a id="floatingWa" class="wa-float" href="https://wa.me/5519989689696?text=Ol%C3%A1%20JL%20Ca%C3%A7ambas!%20Estou%20no%20site%20oficial%20e%20preciso%20de%20uma%20ca%C3%A7amba%20em%20Indaiatuba." target="_blank" rel="noopener noreferrer" aria-label="Solicitar caçamba no WhatsApp oficial (19) 98968-9696">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
     <span>Pedir Caçamba</span>
   </a>
 

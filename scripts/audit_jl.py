@@ -1,11 +1,19 @@
 """
-JL Cacambas e Munck (Indaiatuba/SP) — Multi-Viewport Visual & Functional Auditor
+JL Cacambas e Munck (Indaiatuba/SP) — Multi-Viewport Visual & Functional Auditor v2
 Sixth Iron Law Compliance (1440x900 Desktop + 390x844 Mobile):
-- Captures every act including live WebGL Blender 3D dumpster (Hero empty, Manifesto filling,
-  CAD blueprint, 5-step operation full 4.2m3 + tarp cover + hoist, Fleet gallery + 10 partners,
-  Chameleon configurator Flip, Strikethrough manifesto, Anti-scam & contact, Sumario overlay).
-- Verifies 0px overflowX, 0 console/page errors, 0 broken images, live WebGL 3D pixels delta,
-  0 violet/purple HSV 250-330, and ThSyr VisualCraftValidator static gate.
+- Captures all 6 cinematic acts fusing WEBLOVE 3D Chains + Cacau Show Bento/Builder + Burger King GSAP Flip:
+  01 Hero Claro 3D + Correntes + Logo transparente
+  02 Obsidiana Indice 01-04 + Bento Colorido
+  03 Showroom Camaleao Centralizado
+  04 Showroom GSAP Flip Split 50/50 (produto cruzando a costura vertical)
+  05 Monte sua Cacamba 4,2 m3 (meia carga 3D ao vivo)
+  06 Monte sua Cacamba 4,2 m3 (carga completa + lona azul Lei 097/2017 fechada)
+  07 Planta CAD + Frota Panoramica + 10 Parceiros
+  08 Fechamento Quente + Placa Anti-Golpe Fisica Pendurada + Footer
+  09 Sumario Overlay
+  10-14 Mobile 390x844 (Hero, Bento, Showroom Split, Builder 3D zero-collision, Contato + Placa)
+- Verifies 0px overflowX, 0 console/page errors, 0 broken images, 0 emojis,
+  0 white-box logo backgrounds, 0 violet HSV 250-330, and ThSyr VisualCraftValidator.
 """
 
 import colorsys
@@ -13,7 +21,6 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import json
-import re
 import sys
 import threading
 from PIL import Image
@@ -30,9 +37,10 @@ def start_server():
             pass
 
         def guess_type(self, path):
-            if str(path).endswith(".glb"):
+            s = str(path).lower()
+            if s.endswith(".glb"):
                 return "model/gltf-binary"
-            if str(path).endswith(".js"):
+            if s.endswith(".js"):
                 return "application/javascript"
             return super().guess_type(path)
 
@@ -63,7 +71,15 @@ def check_health(page, label):
             const txt = document.body.innerText || '';
             const emojiRegex = /[\\u{1F300}-\\u{1FAFF}\\u{2600}-\\u{27BF}]/u;
             const hasEmoji = emojiRegex.test(txt);
-            const canvas = document.getElementById('cacambaCanvas');
+
+            const logoImgs = Array.from(document.querySelectorAll('img[src*="logo-jl-cacambas"]'));
+            const logoWhiteBoxes = logoImgs.filter(img => {
+                const bg = getComputedStyle(img).backgroundColor;
+                return bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
+            }).map(img => ({ src: img.getAttribute('src'), bg: getComputedStyle(img).backgroundColor }));
+
+            const heroCanvas = document.getElementById('heroWebglCanvas');
+            const builderCanvas = document.getElementById('builderCanvas');
             return {
                 label,
                 innerWidth: window.innerWidth,
@@ -73,13 +89,27 @@ def check_health(page, label):
                 totalImgs: imgs.length,
                 brokenImgs: broken,
                 hasEmoji,
-                webglReady: Boolean(window.__jl3dReady),
-                canvasSize: canvas ? [canvas.width, canvas.height] : null,
+                logoWhiteBoxes,
+                hero3dReady: Boolean(window.__jlHero3dReady),
+                builder3dReady: Boolean(window.__jlBuilder3dReady),
+                heroCanvasSize: heroCanvas ? [heroCanvas.width, heroCanvas.height] : null,
+                builderCanvasSize: builderCanvas ? [builderCanvas.width, builderCanvas.height] : null,
                 hdrTheme: document.body.dataset.hdrTheme || null,
-                showBrand: document.body.classList.contains('show-brand'),
             };
         }""",
         label,
+    )
+
+
+def force_sync_all(page):
+    page.evaluate(
+        """() => {
+            const a = window.__jlAudit;
+            if (!a) return;
+            if (a.heroRig && a.heroRig.forceSync) a.heroRig.forceSync();
+            if (a.builderRig && a.builderRig.forceSync) a.builderRig.forceSync();
+            if (a.badgePhys && a.badgePhys.forceSync) a.badgePhys.forceSync();
+        }"""
     )
 
 
@@ -90,16 +120,13 @@ def main():
     srv, url = start_server()
     console_errors = []
     page_errors = []
-    report = {"desktop": {}, "mobile": {}, "shots": []}
+    report = {"desktop": {}, "mobile": {}}
 
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(
                 headless=True,
-                args=[
-                    "--enable-webgl",
-                    "--ignore-gpu-blocklist",
-                ],
+                args=["--enable-webgl", "--ignore-gpu-blocklist"],
             )
 
             # ================= DESKTOP 1440x900 =================
@@ -109,15 +136,16 @@ def main():
             page.on("pageerror", lambda e: page_errors.append(str(e)))
 
             page.goto(url, wait_until="networkidle", timeout=60000)
-            page.wait_for_function("() => window.__jl3dReady === true", timeout=20000)
-            # Wait for preloader curtain to clear
-            page.wait_for_timeout(1450)
-            page.evaluate("() => window.__jlRig3D && window.__jlRig3D.forceSync()")
+            page.wait_for_function(
+                "() => window.__jlHero3dReady === true && window.__jlBuilder3dReady === true",
+                timeout=25000,
+            )
+            page.wait_for_timeout(1600)
+            force_sync_all(page)
             page.wait_for_timeout(200)
 
             report["desktop"]["hero_health"] = check_health(page, "desktop_hero")
-            p_hero = SHOTS / "01_desktop_hero_3d.png"
-            page.screenshot(path=str(p_hero))
+            page.screenshot(path=str(SHOTS / "01_desktop_hero_light_3d_chains.png"))
 
             stops = page.evaluate(
                 """() => {
@@ -125,63 +153,93 @@ def main():
                         const el = document.querySelector(sel);
                         return el ? Math.round(el.getBoundingClientRect().top + window.scrollY) : 0;
                     };
-                    const hOf = (sel) => {
-                        const el = document.querySelector(sel);
-                        return el ? Math.round(el.offsetHeight) : 0;
-                    };
-                    const opTop = topOf('#operacao');
-                    const opScrollable = Math.max(100, hOf('#operacao') - window.innerHeight);
                     return {
-                        historia: topOf('#historia') + 80,
-                        manifesto_fill: topOf('#manifesto') + 520,
-                        cad_blueprint: topOf('#especificacao') + Math.round(hOf('#especificacao') * 0.48),
-                        evp_full_rubble: opTop + Math.round(opScrollable * 0.56),
-                        evp_tarp_cover: opTop + Math.round(opScrollable * 0.78),
-                        evp_hoist: opTop + Math.round(opScrollable * 0.92),
-                        frota_partners: topOf('#frota') + 780,
-                        simulador: topOf('#simulador') + 40,
-                        strike: topOf('#compromisso') + 120,
+                        servicos: topOf('#servicos') + 60,
+                        bento: topOf('.bento-grid') - 120,
+                        showroom: topOf('#showroom') + 10,
+                        simulador: topOf('#simulador') + 10,
+                        especificacao: topOf('#especificacao') + 80,
+                        frota_partners: topOf('.partners-marquee') ? topOf('.partners-marquee') - 420 : topOf('#especificacao') + 860,
                         contato: document.documentElement.scrollHeight - 900,
                     };
                 }"""
             )
 
-            chrome_states = {}
-            order = [
-                ("02_desktop_historia.png", "historia"),
-                ("03_desktop_manifesto_3d_filling.png", "manifesto_fill"),
-                ("04_desktop_cad_blueprint.png", "cad_blueprint"),
-                ("05_desktop_evp_full_rubble.png", "evp_full_rubble"),
-                ("06_desktop_evp_tarp_lei097.png", "evp_tarp_cover"),
-                ("07_desktop_frota_partners.png", "frota_partners"),
-                ("08_desktop_simulador.png", "simulador"),
-                ("09_desktop_strike.png", "strike"),
-                ("10_desktop_contato_antiscam.png", "contato"),
-            ]
+            # 02 Obsidiana Services + Chains + Bento
+            page.evaluate(f"window.scrollTo(0, {stops['servicos']})")
+            page.wait_for_timeout(700)
+            force_sync_all(page)
+            page.wait_for_timeout(160)
+            page.screenshot(path=str(SHOTS / "02_desktop_obsidian_services.png"))
 
-            for fname, key in order:
-                page.evaluate(f"window.scrollTo(0, {stops[key]})")
-                page.wait_for_timeout(680)
-                page.evaluate("() => window.__jlRig3D && window.__jlRig3D.forceSync()")
-                page.wait_for_timeout(200)
-                if key == "simulador":
-                    # Test interactive Chameleon Flip switch to Demolicao
-                    page.click('[data-profile-btn="demolicao"]')
-                    page.wait_for_timeout(520)
-                out_p = SHOTS / fname
-                page.screenshot(path=str(out_p))
-                chrome_states[key] = page.evaluate(
-                    "() => ({ theme: document.body.dataset.hdrTheme, showBrand: document.body.classList.contains('show-brand'), vol: (document.getElementById('hudVolumeVal')||{}).textContent })"
-                )
+            if stops["bento"] > stops["servicos"] + 150:
+                page.evaluate(f"window.scrollTo(0, {stops['bento']})")
+                page.wait_for_timeout(550)
+                force_sync_all(page)
+                page.screenshot(path=str(SHOTS / "02b_desktop_bento_cacau.png"))
 
-            # Open Sumario menu and screenshot
-            page.click("#menuToggleBtn")
-            page.wait_for_timeout(560)
-            page.screenshot(path=str(SHOTS / "11_desktop_sumario.png"))
-            page.click("#menuToggleBtn")
-            page.wait_for_timeout(300)
+            # 03 Showroom Chameleon Centered
+            page.evaluate(f"window.scrollTo(0, {stops['showroom']})")
+            page.wait_for_timeout(650)
+            force_sync_all(page)
+            page.screenshot(path=str(SHOTS / "03_desktop_showroom_chameleon.png"))
 
-            report["desktop"]["chrome_states"] = chrome_states
+            # 04 Showroom GSAP Flip Split 50/50
+            page.evaluate("() => window.__jlAudit && window.__jlAudit.openShowroomSplit && window.__jlAudit.openShowroomSplit(0)")
+            page.wait_for_timeout(850)
+            page.screenshot(path=str(SHOTS / "04_desktop_showroom_flip_split.png"))
+            page.evaluate("() => window.__jlAudit && window.__jlAudit.closeShowroomSplit && window.__jlAudit.closeShowroomSplit()")
+            page.wait_for_timeout(450)
+
+            # 05 Monte sua Cacamba — mid fill (3 lotes)
+            page.evaluate(f"window.scrollTo(0, {stops['simulador']})")
+            page.wait_for_timeout(600)
+            page.evaluate(
+                """() => {
+                    if (window.__jlAudit && window.__jlAudit.addBuilderItem) {
+                        window.__jlAudit.addBuilderItem('alvenaria');
+                        window.__jlAudit.addBuilderItem('concreto');
+                        window.__jlAudit.addBuilderItem('madeira');
+                    }
+                }"""
+            )
+            page.wait_for_timeout(450)
+            force_sync_all(page)
+            page.wait_for_timeout(180)
+            page.screenshot(path=str(SHOTS / "05_desktop_builder_mid_fill.png"))
+
+            # 06 Monte sua Cacamba — full 4,2 m3 + Lona Azul fechada!
+            page.evaluate("() => window.__jlAudit && window.__jlAudit.fillBuilderComplete && window.__jlAudit.fillBuilderComplete()")
+            page.wait_for_timeout(550)
+            force_sync_all(page)
+            page.wait_for_timeout(180)
+            page.screenshot(path=str(SHOTS / "06_desktop_builder_full_tarp.png"))
+
+            # 07 CAD Blueprint + Frota + Parceiros
+            page.evaluate(f"window.scrollTo(0, {stops['especificacao']})")
+            page.wait_for_timeout(650)
+            page.screenshot(path=str(SHOTS / "07_desktop_cad_blueprint.png"))
+
+            page.evaluate(f"window.scrollTo(0, {stops['frota_partners']})")
+            page.wait_for_timeout(650)
+            page.screenshot(path=str(SHOTS / "07b_desktop_frota_partners.png"))
+
+            # 08 Warm Closing + Physical Hanging Anti-Scam Badge + Footer
+            page.evaluate(f"window.scrollTo(0, {stops['contato']})")
+            page.wait_for_timeout(700)
+            page.evaluate("() => window.__jlAudit && window.__jlAudit.badgePhys && window.__jlAudit.badgePhys.impulse(0.28)")
+            page.wait_for_timeout(240)
+            force_sync_all(page)
+            page.screenshot(path=str(SHOTS / "08_desktop_contact_lanyard_warm.png"))
+
+            # 09 Sumario Overlay
+            if page.locator("#menuToggleBtn").count() > 0:
+                page.click("#menuToggleBtn")
+                page.wait_for_timeout(520)
+                page.screenshot(path=str(SHOTS / "09_desktop_sumario.png"))
+                page.click("#menuToggleBtn")
+                page.wait_for_timeout(250)
+
             report["desktop"]["final_health"] = check_health(page, "desktop_final")
             ctx.close()
 
@@ -192,11 +250,14 @@ def main():
             mpage.on("pageerror", lambda e: page_errors.append("[MOB] " + str(e)))
 
             mpage.goto(url, wait_until="networkidle", timeout=60000)
-            mpage.wait_for_function("() => window.__jl3dReady === true", timeout=20000)
-            mpage.wait_for_timeout(1450)
-            mpage.evaluate("() => window.__jlRig3D && window.__jlRig3D.forceSync()")
+            mpage.wait_for_function(
+                "() => window.__jlHero3dReady === true && window.__jlBuilder3dReady === true",
+                timeout=25000,
+            )
+            mpage.wait_for_timeout(1600)
+            force_sync_all(mpage)
             mpage.wait_for_timeout(200)
-            mpage.screenshot(path=str(SHOTS / "12_mobile_hero_3d.png"))
+            mpage.screenshot(path=str(SHOTS / "10_mobile_hero_3d.png"))
             report["mobile"]["hero_health"] = check_health(mpage, "mobile_hero")
 
             m_stops = mpage.evaluate(
@@ -205,25 +266,45 @@ def main():
                         const el = document.querySelector(sel);
                         return el ? Math.round(el.getBoundingClientRect().top + window.scrollY) : 0;
                     };
-                    const hOf = (sel) => {
-                        const el = document.querySelector(sel);
-                        return el ? Math.round(el.offsetHeight) : 0;
-                    };
-                    const opTop = topOf('#operacao');
-                    const opScr = Math.max(100, hOf('#operacao') - window.innerHeight);
                     return {
-                        evp: opTop + Math.round(opScr * 0.56),
-                        sim: topOf('#simulador') + 30,
+                        bento: topOf('.bento-grid') - 80,
+                        showroom: topOf('#showroom') + 10,
+                        simulador: topOf('#simulador') + 10,
                         contato: document.documentElement.scrollHeight - 844,
                     };
                 }"""
             )
-            for fname, key in (("13_mobile_evp_3d.png", "evp"), ("14_mobile_simulador.png", "sim"), ("15_mobile_contato.png", "contato")):
-                mpage.evaluate(f"window.scrollTo(0, {m_stops[key]})")
-                mpage.wait_for_timeout(650)
-                mpage.evaluate("() => window.__jlRig3D && window.__jlRig3D.forceSync()")
-                mpage.wait_for_timeout(180)
-                mpage.screenshot(path=str(SHOTS / fname))
+
+            mpage.evaluate(f"window.scrollTo(0, {m_stops['bento']})")
+            mpage.wait_for_timeout(550)
+            mpage.screenshot(path=str(SHOTS / "11_mobile_bento.png"))
+
+            mpage.evaluate(f"window.scrollTo(0, {m_stops['showroom']})")
+            mpage.wait_for_timeout(550)
+            mpage.evaluate("() => window.__jlAudit && window.__jlAudit.openShowroomSplit && window.__jlAudit.openShowroomSplit(0)")
+            mpage.wait_for_timeout(750)
+            mpage.screenshot(path=str(SHOTS / "12_mobile_showroom_split.png"))
+            mpage.evaluate("() => window.__jlAudit && window.__jlAudit.closeShowroomSplit && window.__jlAudit.closeShowroomSplit()")
+
+            mpage.evaluate(f"window.scrollTo(0, {m_stops['simulador']})")
+            mpage.wait_for_timeout(550)
+            mpage.evaluate(
+                """() => {
+                    if (window.__jlAudit && window.__jlAudit.addBuilderItem) {
+                        window.__jlAudit.addBuilderItem('alvenaria');
+                        window.__jlAudit.addBuilderItem('concreto');
+                    }
+                }"""
+            )
+            mpage.wait_for_timeout(400)
+            force_sync_all(mpage)
+            mpage.wait_for_timeout(160)
+            mpage.screenshot(path=str(SHOTS / "13_mobile_builder_3d.png"))
+
+            mpage.evaluate(f"window.scrollTo(0, {m_stops['contato']})")
+            mpage.wait_for_timeout(600)
+            force_sync_all(mpage)
+            mpage.screenshot(path=str(SHOTS / "14_mobile_contact_lanyard.png"))
 
             report["mobile"]["final_health"] = check_health(mpage, "mobile_final")
             mctx.close()
@@ -231,7 +312,6 @@ def main():
     finally:
         srv.shutdown()
 
-    # Check zero purple HSV 250-330 across all screenshots
     violet_summary = {}
     for png in sorted(SHOTS.glob("*.png")):
         violet_summary[png.name] = check_purple_in_image(png)
@@ -239,12 +319,16 @@ def main():
     report["console_errors"] = console_errors
     report["page_errors"] = page_errors
 
-    # Run ThSyr VisualCraftValidator
     try:
         sys.path.insert(0, r"c:\Users\stdma\projetos\ThSyr")
         from engine.visual.validator import VisualCraftValidator
         val = VisualCraftValidator()
-        res = val.audit_file(ROOT / "index.html")
+        combined = (
+            (ROOT / "index.html").read_text(encoding="utf-8", errors="ignore")
+            + "\n"
+            + (ROOT / "assets" / "css" / "styles.css").read_text(encoding="utf-8", errors="ignore")
+        )
+        res = val.audit_content(combined, source_name="index.html + assets/css/styles.css")
         report["visual_craft_validator"] = res if isinstance(res, dict) else vars(res)
     except Exception as e:
         report["visual_craft_validator_note"] = str(e)
