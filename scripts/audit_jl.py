@@ -137,7 +137,7 @@ def main():
 
             page.goto(url, wait_until="networkidle", timeout=60000)
             page.wait_for_function(
-                "() => window.__jlHero3dReady === true && window.__jlBuilder3dReady === true",
+                "() => window.__jlHero3dReady === true",
                 timeout=25000,
             )
             page.wait_for_timeout(1600)
@@ -157,7 +157,6 @@ def main():
                         servicos: topOf('#servicos') + 60,
                         bento: topOf('.bento-grid') - 120,
                         showroom: topOf('#showroom') + 10,
-                        simulador: topOf('#simulador') + 10,
                         especificacao: topOf('#especificacao') + 80,
                         frota_partners: topOf('.partners-marquee') ? topOf('.partners-marquee') - 420 : topOf('#especificacao') + 860,
                         contato: document.documentElement.scrollHeight - 900,
@@ -190,30 +189,6 @@ def main():
             page.screenshot(path=str(SHOTS / "04_desktop_showroom_flip_split.png"))
             page.evaluate("() => window.__jlAudit && window.__jlAudit.closeShowroomSplit && window.__jlAudit.closeShowroomSplit()")
             page.wait_for_timeout(450)
-
-            # 05 Monte sua Cacamba — mid fill (3 lotes)
-            page.evaluate(f"window.scrollTo(0, {stops['simulador']})")
-            page.wait_for_timeout(600)
-            page.evaluate(
-                """() => {
-                    if (window.__jlAudit && window.__jlAudit.addBuilderItem) {
-                        window.__jlAudit.addBuilderItem('alvenaria');
-                        window.__jlAudit.addBuilderItem('concreto');
-                        window.__jlAudit.addBuilderItem('madeira');
-                    }
-                }"""
-            )
-            page.wait_for_timeout(450)
-            force_sync_all(page)
-            page.wait_for_timeout(180)
-            page.screenshot(path=str(SHOTS / "05_desktop_builder_mid_fill.png"))
-
-            # 06 Monte sua Cacamba — full 4,2 m3 + Lona Azul fechada!
-            page.evaluate("() => window.__jlAudit && window.__jlAudit.fillBuilderComplete && window.__jlAudit.fillBuilderComplete()")
-            page.wait_for_timeout(550)
-            force_sync_all(page)
-            page.wait_for_timeout(180)
-            page.screenshot(path=str(SHOTS / "06_desktop_builder_full_tarp.png"))
 
             # 07 CAD Blueprint + Frota + Parceiros
             page.evaluate(f"window.scrollTo(0, {stops['especificacao']})")
@@ -251,7 +226,7 @@ def main():
 
             mpage.goto(url, wait_until="networkidle", timeout=60000)
             mpage.wait_for_function(
-                "() => window.__jlHero3dReady === true && window.__jlBuilder3dReady === true",
+                "() => window.__jlHero3dReady === true",
                 timeout=25000,
             )
             mpage.wait_for_timeout(1600)
@@ -269,7 +244,6 @@ def main():
                     return {
                         bento: topOf('.bento-grid') - 80,
                         showroom: topOf('#showroom') + 10,
-                        simulador: topOf('#simulador') + 10,
                         contato: document.documentElement.scrollHeight - 844,
                     };
                 }"""
@@ -285,21 +259,6 @@ def main():
             mpage.wait_for_timeout(750)
             mpage.screenshot(path=str(SHOTS / "12_mobile_showroom_split.png"))
             mpage.evaluate("() => window.__jlAudit && window.__jlAudit.closeShowroomSplit && window.__jlAudit.closeShowroomSplit()")
-
-            mpage.evaluate(f"window.scrollTo(0, {m_stops['simulador']})")
-            mpage.wait_for_timeout(550)
-            mpage.evaluate(
-                """() => {
-                    if (window.__jlAudit && window.__jlAudit.addBuilderItem) {
-                        window.__jlAudit.addBuilderItem('alvenaria');
-                        window.__jlAudit.addBuilderItem('concreto');
-                    }
-                }"""
-            )
-            mpage.wait_for_timeout(400)
-            force_sync_all(mpage)
-            mpage.wait_for_timeout(160)
-            mpage.screenshot(path=str(SHOTS / "13_mobile_builder_3d.png"))
 
             mpage.evaluate(f"window.scrollTo(0, {m_stops['contato']})")
             mpage.wait_for_timeout(600)

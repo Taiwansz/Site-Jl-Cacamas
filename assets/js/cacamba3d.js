@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+﻿import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
@@ -449,8 +449,8 @@ export function createHeroRig3D({ canvas, stageEl } = {}) {
   const chainB = new THREE.InstancedMesh(linkGeo, chainMat, CHAIN_LINKS);
   chainA.frustumCulled = false;
   chainB.frustumCulled = false;
-  scene.add(chainA);
-  scene.add(chainB);
+  chainA.visible = false;
+  chainB.visible = false;
 
   const ptsA = Array.from({ length: 5 }, () => new THREE.Vector3());
   const ptsB = Array.from({ length: 5 }, () => new THREE.Vector3());
@@ -459,7 +459,7 @@ export function createHeroRig3D({ canvas, stageEl } = {}) {
 
   // 28 Industrial metallic & concrete blocks for opening implosion (triggerImplosion)
   const implosionGroup = new THREE.Group();
-  scene.add(implosionGroup);
+  scene.add(implosionGroup);  implosionGroup.visible = false;
 
   const fragGeoBox = new THREE.BoxGeometry(0.26, 0.18, 0.22);
   const fragGeoSlab = new THREE.BoxGeometry(0.32, 0.10, 0.20);
